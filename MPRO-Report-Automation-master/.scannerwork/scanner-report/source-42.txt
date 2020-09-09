@@ -1,0 +1,157 @@
+package com.maxlifeinsurance.mpro.dto;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class CrmBancaCustomerDetails implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private long crmAccountNo;
+	private Date crmAccountOpendate;
+	private String crmArea;
+	private String crmBankBranchName;
+	private String crmCity;
+	private String crmCountry;
+	private String crmCustomerFirstName;
+	private String crmCustomerLastName;
+	private String crmCustomerMiddleName;
+	private Date crmDob;
+	private String crmHouseNo;
+	private String crmLandmark;
+	private String crmPanCard;
+	private String crmPinCode;
+	private String crmState;
+	private String crmtitle;
+
+	public String getCrmBankBranchName() {
+		return crmBankBranchName;
+	}
+
+	public void setCrmBankBranchName(String crmBankBranchName) {
+		this.crmBankBranchName = crmBankBranchName;
+	}
+
+	public String getCrmCity() {
+		return crmCity;
+	}
+
+	public void setCrmCity(String crmCity) {
+		this.crmCity = crmCity;
+	}
+
+	public String getCrmCountry() {
+		return crmCountry;
+	}
+
+	public void setCrmCountry(String crmCountry) {
+		this.crmCountry = crmCountry;
+	}
+
+	public String getCrmCustomerFirstName() {
+		return crmCustomerFirstName;
+	}
+
+	public void setCrmCustomerFirstName(String crmCustomerFirstName) {
+		this.crmCustomerFirstName = crmCustomerFirstName;
+	}
+
+	public String getCrmCustomerLastName() {
+		return crmCustomerLastName;
+	}
+
+	public void setCrmCustomerLastName(String crmCustomerLastName) {
+		this.crmCustomerLastName = crmCustomerLastName;
+	}
+
+	public String getCrmCustomerMiddleName() {
+		return crmCustomerMiddleName;
+	}
+
+	public void setCrmCustomerMiddleName(String crmCustomerMiddleName) {
+		this.crmCustomerMiddleName = crmCustomerMiddleName;
+	}
+
+	public Date getCrmDob() {
+		return crmDob;
+	}
+
+	public void setCrmDob(Date crmDob) {
+		this.crmDob = crmDob;
+	}
+
+	public String getCrmHouseNo() {
+		return crmHouseNo;
+	}
+
+	public void setCrmHouseNo(String crmHouseNo) {
+		this.crmHouseNo = crmHouseNo;
+	}
+
+	public String getCrmLandmark() {
+		return crmLandmark;
+	}
+
+	public void setCrmLandmark(String crmLandmark) {
+		this.crmLandmark = crmLandmark;
+	}
+
+	public String getCrmPanCard() {
+		return crmPanCard;
+	}
+
+	public void setCrmPanCard(String crmPanCard) {
+		this.crmPanCard = crmPanCard;
+	}
+
+	public String getCrmPinCode() {
+		return crmPinCode;
+	}
+
+	public void setCrmPinCode(String crmPinCode) {
+		this.crmPinCode = crmPinCode;
+	}
+
+	public String getCrmState() {
+		return crmState;
+	}
+
+	public void setCrmState(String crmState) {
+		this.crmState = crmState;
+	}
+
+	public String getCrmtitle() {
+		return crmtitle;
+	}
+
+	public void setCrmtitle(String crmtitle) {
+		this.crmtitle = crmtitle;
+	}
+
+	public String getCrmArea() {
+		return crmArea;
+	}
+
+	public void setCrmArea(String crmArea) {
+		this.crmArea = crmArea;
+	}
+
+	public Date getCrmAccountOpendate() {
+		return crmAccountOpendate;
+	}
+
+	public void setCrmAccountOpendate(Date crmAccountOpendate) {
+		this.crmAccountOpendate = crmAccountOpendate;
+	}
+
+	public long getCrmAccountNo() {
+		return crmAccountNo;
+	}
+
+	public void setCrmAccountNo(long crmAccountNo) {
+		this.crmAccountNo = crmAccountNo;
+	}
+
+}

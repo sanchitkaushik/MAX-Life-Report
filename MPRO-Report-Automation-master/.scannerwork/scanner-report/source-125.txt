@@ -1,0 +1,1689 @@
+//package com.maxlifeinsurance.mpro.utils;
+//
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//import org.bson.Document;
+//
+//import com.maxlifeinsurance.mpro.dto.BureauResponseDto;
+//import com.maxlifeinsurance.mpro.dto.NomineeDetails;
+//import com.maxlifeinsurance.mpro.dto.PartyInfoAddressDetailsDto;
+//import com.maxlifeinsurance.mpro.dto.PartyInformation;
+//import com.maxlifeinsurance.mpro.dto.PepDetailsDto;
+//
+///**
+// * 
+// * @author Qualtech
+// *
+// */
+//public class MproDbUtility {
+//
+//	private MproDbUtility() {
+//	}
+//
+//	public static String getChannel(Document document) {
+//		String channel = null;
+//		try {
+//			if (document.containsKey(StringConstants.CHANNEL_DETAILS) && document.get(StringConstants.CHANNEL_DETAILS, Document.class).containsKey(StringConstants.CHANNEL)) {
+//				channel = document.get(StringConstants.CHANNEL_DETAILS, Document.class).getString(StringConstants.CHANNEL);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return channel;
+//	}
+//
+//	public static String getCustomerClassification(Document document) {
+//		String customerClassification = null;
+//		try {
+//			if (document.containsKey(StringConstants.BANCA_DETAILS) && document.get(StringConstants.BANCA_DETAILS, Document.class).containsKey(StringConstants.CUSTOMER_CLASSIFICATION)) {
+//				customerClassification = document.get(StringConstants.CHANNEL_DETAILS, Document.class).getString(StringConstants.CUSTOMER_CLASSIFICATION);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return customerClassification;
+//	}
+//
+//	public static String getBancaId(Document document) {
+//		String bancaId = null;
+//		try {
+//			if (document.containsKey(StringConstants.BANCA_DETAILS) && document.get(StringConstants.BANCA_DETAILS, Document.class).containsKey(StringConstants.BANCA_ID)) {
+//				bancaId = document.get(StringConstants.BANCA_DETAILS, Document.class).getString(StringConstants.BANCA_ID);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return bancaId;
+//	}
+//
+//	public static String getOriginalChannel(Document document) {
+//		String originalChannel = null;
+//		try {
+//			if (document.containsKey(StringConstants.CHANNEL_DETAILS) && document.get(StringConstants.CHANNEL_DETAILS, Document.class).containsKey(StringConstants.CHANNEL)) {
+//				originalChannel = document.get(StringConstants.CHANNEL_DETAILS, Document.class).getString(StringConstants.ORIGINAL_CHANNEL);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return originalChannel;
+//	}
+//
+//	public static String getPolicyNumber(Document document) {
+//		String policyNumber = null;
+//		try {
+//			if (document.containsKey(StringConstants.APPLICATION_DETAILS) && document.get(StringConstants.APPLICATION_DETAILS, Document.class).containsKey(StringConstants.POLICY_NUMBER)) {
+//				policyNumber = document.get(StringConstants.APPLICATION_DETAILS, Document.class).getString(StringConstants.POLICY_NUMBER);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return policyNumber;
+//	}
+//
+//	public static String getFormType(Document document) {
+//		String formType = null;
+//		try {
+//			if (document.containsKey(StringConstants.APPLICATION_DETAILS) && document.get(StringConstants.APPLICATION_DETAILS, Document.class).containsKey(StringConstants.FORM_TYPE)) {
+//				formType = document.get(StringConstants.APPLICATION_DETAILS, Document.class).getString(StringConstants.FORM_TYPE);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return formType;
+//	}
+//
+//	public static String getCreatedTime(Document document) {
+//		String createdTime = null;
+//		try {
+//			if (document.containsKey(StringConstants.APPLICATION_DETAILS) && document.get(StringConstants.APPLICATION_DETAILS, Document.class).containsKey(StringConstants.CREATED_TIME)) {
+//				createdTime = document.get(StringConstants.APPLICATION_DETAILS, Document.class).getDate(StringConstants.CREATED_TIME).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return createdTime;
+//	}
+//
+//	public static String getLeadId(Document document) {
+//		String leadId = null;
+//		try {
+//			if (document.containsKey(StringConstants.BANCA_DETAILS) && document.get(StringConstants.BANCA_DETAILS, Document.class).containsKey(StringConstants.LEAD_ID)) {
+//				leadId = document.get(StringConstants.BANCA_DETAILS, Document.class).getString(StringConstants.LEAD_ID);
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return leadId;
+//	}
+//
+//	public static String getTransactionId(Document document) {
+//		String transactionID = null;
+//		try {
+//			if (document.containsKey(StringConstants.TRANSACTION_ID) && document.get(StringConstants.TRANSACTION_ID) != null) {
+//				transactionID = document.get(StringConstants.TRANSACTION_ID).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return transactionID;
+//	}
+//
+//	public static String getIsPaymentDone(Document mongoDocument) {
+//		String isPaymentDone = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.ADDITIONAL_FLAGS) && mongoDocument.get(StringConstants.ADDITIONAL_FLAGS, Document.class).containsKey(StringConstants.IS_PAYMENT_DONE)) {
+//				isPaymentDone = mongoDocument.get(StringConstants.ADDITIONAL_FLAGS, Document.class).get(StringConstants.IS_PAYMENT_DONE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return isPaymentDone;
+//	}
+//
+//	public static String getPosvJourneyStatus(Document mongoDocument) {
+//		String posvJourneyStatus = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.APPLICATION_DETAILS) && mongoDocument.get(StringConstants.APPLICATION_DETAILS, Document.class).containsKey(StringConstants.POSV_JOURNEY_STATUS)) {
+//				posvJourneyStatus = mongoDocument.get(StringConstants.APPLICATION_DETAILS, Document.class).get(StringConstants.POSV_JOURNEY_STATUS).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return posvJourneyStatus;
+//	}
+//
+//	public static String getStage(Document mongoDocument) {
+//		String stage = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.APPLICATION_DETAILS) && mongoDocument.get(StringConstants.APPLICATION_DETAILS, Document.class).containsKey(StringConstants.STAGE)) {
+//				stage = mongoDocument.get(StringConstants.APPLICATION_DETAILS, Document.class).get(StringConstants.STAGE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return stage;
+//	}
+//
+//	public static String getCustomerId(Document mongoDocument) {
+//		String customerID = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.BANCA_DETAILS) && mongoDocument.get(StringConstants.BANCA_DETAILS, Document.class).containsKey(StringConstants.CUSTOMER_ID)) {
+//				customerID = mongoDocument.get(StringConstants.BANCA_DETAILS, Document.class).get(StringConstants.CUSTOMER_ID).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return customerID;
+//	}
+//
+//	public static String getPaymentRenewedBy(Document mongoDocument) {
+//		String paymentRenewedBy = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.BANK) && mongoDocument.get(StringConstants.BANK, Document.class).containsKey(StringConstants.PAYMENT_RENEWED_BY)) {
+//				paymentRenewedBy = mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.PAYMENT_RENEWED_BY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return paymentRenewedBy;
+//	}
+//
+//	public static String getBranchCode(Document mongoDocument) {
+//		String branchCode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.CHANNEL_DETAILS) && mongoDocument.get(StringConstants.CHANNEL_DETAILS, Document.class).containsKey(StringConstants.BRANCH_CODE)) {
+//				branchCode = mongoDocument.get(StringConstants.CHANNEL_DETAILS, Document.class).get(StringConstants.BRANCH_CODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return branchCode;
+//	}
+//
+//	public static String getPremiumMode(Document mongoDocument) {
+//		String premiumMode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.PREMIUM_MODE)) {
+//				premiumMode = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PREMIUM_MODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return premiumMode;
+//	}
+//
+//	public static String getPlanCode(Document mongoDocument) {
+//		String planCode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PLANCODE)) {
+//				planCode = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PLANCODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return planCode;
+//	}
+//
+//	public static String getPlanCodeTpp(Document mongoDocument) {
+//		String planCodeTpp = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PLANCODE_TPP)) {
+//				planCodeTpp = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PLANCODE_TPP).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return planCodeTpp;
+//	}
+//
+//	public static String getPlanCodePOSV(Document mongoDocument) {
+//		String planCodePOSV = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PLAN_CODE_POSV)) {
+//				planCodePOSV = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PLAN_CODE_POSV).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return planCodePOSV;
+//	}
+//
+//	public static String getPlanCodeMFSA(Document mongoDocument) {
+//		String planCodeMFSA = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PLAN_CODE_MFSA)) {
+//				planCodeMFSA = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PLAN_CODE_MFSA).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return planCodeMFSA;
+//	}
+//
+//	public static String getAfyp(Document mongoDocument) {
+//		String afyp = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE) && mongoDocument
+//							.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).containsKey(StringConstants.AFYP)) {
+//				afyp = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).get(StringConstants.AFYP)
+//						.toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return afyp;
+//	}
+//
+//	public static String getAtp(Document mongoDocument) {
+//		String atp = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE) && mongoDocument
+//							.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).containsKey(StringConstants.ATP)) {
+//				atp = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).get(StringConstants.ATP)
+//						.toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return atp;
+//	}
+//
+//	public static String getCoverageTerm(Document mongoDocument) {
+//		String coverageTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.COVERAGE_TERM)) {
+//				coverageTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.COVERAGE_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return coverageTerm;
+//	}
+//
+//	public static String getDeathBenefit(Document mongoDocument) {
+//		String deathBenefit = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.DEATH_BENEFIT)) {
+//				deathBenefit = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.DEATH_BENEFIT).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return deathBenefit;
+//	}
+//
+//	public static String getSumAssured(Document mongoDocument) {
+//		String sumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.SUM_ASSURED)) {
+//				sumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.SUM_ASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return sumAssured;
+//	}
+//
+//	public static String getFirstYearWOPPlusRiderPremiumSummary(Document mongoDocument) {
+//		String firstYearWOPPlusRiderPremiumSummary = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.FIRST_YEAR_WOP_PLUS_RIDER_PREMIUM_SUMMARY)) {
+//				firstYearWOPPlusRiderPremiumSummary = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.FIRST_YEAR_WOP_PLUS_RIDER_PREMIUM_SUMMARY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return firstYearWOPPlusRiderPremiumSummary;
+//	}
+//
+//	public static String getWopPlusRiderTerm(Document mongoDocument) {
+//		String wopPlusRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.WOP_PLUS_RIDER_TERM)) {
+//				wopPlusRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.WOP_PLUS_RIDER_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return wopPlusRiderTerm;
+//	}
+//
+//	public static String getWopPlusRiderSumAssured(Document mongoDocument) {
+//		String wopPlusRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.WOP_PLUS_RIDER_SUMASSURED)) {
+//				wopPlusRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.WOP_PLUS_RIDER_SUMASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return wopPlusRiderSumAssured;
+//	}
+//
+//	public static String getFirstYearPartnerCareRiderPremiumSummary(Document mongoDocument) {
+//		String firstYearPartnerCareRiderPremiumSummary = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.FIRST_YEAR_PARTNER_CARE_RIDER_PREMIUM_SUMMARY)) {
+//				firstYearPartnerCareRiderPremiumSummary = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class)
+//						.get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).get(StringConstants.FIRST_YEAR_PARTNER_CARE_RIDER_PREMIUM_SUMMARY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return firstYearPartnerCareRiderPremiumSummary;
+//	}
+//
+//	public static String getPartnerCareRiderTerm(Document mongoDocument) {
+//		String partnerCareRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.PARTNER_CARE_RIDER_TERM)) {
+//				partnerCareRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.PARTNER_CARE_RIDER_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return partnerCareRiderTerm;
+//	}
+//
+//	public static String getPartnerCareRiderSumAssured(Document mongoDocument) {
+//		String partnerCareRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.PARTNER_CARE_RIDER_SUMASSURED)) {
+//				partnerCareRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.PARTNER_CARE_RIDER_SUMASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return partnerCareRiderSumAssured;
+//	}
+//
+//	public static String getFirstYearAccidentCoverRiderPremiumSummary(Document mongoDocument) {
+//		String firstYearAccidentCoverRiderPremiumSummary = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.FIRST_YEAR_ACCIDENT_COVERRIDER_PREMIUM_SUMMARY)) {
+//				firstYearAccidentCoverRiderPremiumSummary = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class)
+//						.get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).get(StringConstants.FIRST_YEAR_ACCIDENT_COVERRIDER_PREMIUM_SUMMARY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return firstYearAccidentCoverRiderPremiumSummary;
+//	}
+//
+//	public static String getAccidentCoverRiderTerm(Document mongoDocument) {
+//		String accidentCoverRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.ACCIDENT_COVER_RIDERTERM)) {
+//				accidentCoverRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.ACCIDENT_COVER_RIDERTERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return accidentCoverRiderTerm;
+//	}
+//
+//	public static String getFirstYearTermPlusRiderPremiumSummary(Document mongoDocument) {
+//		String firstYearTermPlusRiderPremiumSummary = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.FIRST_YEAR_TERM_PLUS_RIDER_PREMIUM_SUMMARY)) {
+//				firstYearTermPlusRiderPremiumSummary = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.FIRST_YEAR_TERM_PLUS_RIDER_PREMIUM_SUMMARY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return firstYearTermPlusRiderPremiumSummary;
+//	}
+//
+//	public static String getTermPlusRiderTerm(Document mongoDocument) {
+//		String termPlusRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.TERM_PLUS_RIDER_TERM)) {
+//				termPlusRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.TERM_PLUS_RIDER_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return termPlusRiderTerm;
+//	}
+//
+//	public static String getTermPlusRiderSumAssured(Document mongoDocument) {
+//		String termPlusRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.TERM_PLUS_RIDER_SUMASSURED)) {
+//				termPlusRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.TERM_PLUS_RIDER_SUMASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return termPlusRiderSumAssured;
+//	}
+//
+//	public static String getFirstYearADDRiderPremiumSummary(Document mongoDocument) {
+//		String firstYearADDRiderPremiumSummary = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.FIRST_YEAR_ADD_RIDER_PREMIUM_SUMMARY)) {
+//				firstYearADDRiderPremiumSummary = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.FIRST_YEAR_ADD_RIDER_PREMIUM_SUMMARY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return firstYearADDRiderPremiumSummary;
+//	}
+//
+//	public static String getAddRiderTerm(Document mongoDocument) {
+//		String addRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.ADD_RIDER_TERM)) {
+//				addRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.ADD_RIDER_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return addRiderTerm;
+//	}
+//
+//	public static String getAddRiderSumAssured(Document mongoDocument) {
+//		String addRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.ADD_RIDER_SUMASSURED)) {
+//				addRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.ADD_RIDER_SUMASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return addRiderSumAssured;
+//	}
+//
+//	public static String getAccidentCoverRiderSumAssured(Document mongoDocument) {
+//		String accidentCoverRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.ACCIDENT_COVER_RIDER_SUM_ASSURED)) {
+//				accidentCoverRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.ACCIDENT_COVER_RIDER_SUM_ASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return accidentCoverRiderSumAssured;
+//	}
+//
+//	public static String getFirstYearAcceleratedCriticalIllnessRiderPremiumSummary(Document mongoDocument) {
+//		String firstYearAcceleratedCriticalIllnessRiderPremiumSummary = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.FIRST_YEAR_ACCELERATED_CRITICAL_ILLNESS_RIDER_PREMIUM_SUMMARY)) {
+//				firstYearAcceleratedCriticalIllnessRiderPremiumSummary = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class)
+//						.get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).get(StringConstants.FIRST_YEAR_ACCELERATED_CRITICAL_ILLNESS_RIDER_PREMIUM_SUMMARY).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return firstYearAcceleratedCriticalIllnessRiderPremiumSummary;
+//	}
+//
+//	public static String getAcceleratedCriticalIllnessRiderTerm(Document mongoDocument) {
+//		String acceleratedCriticalIllnessRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.ACCELERATED_CRITICAL_ILLNESS_RIDERTERM)) {
+//				acceleratedCriticalIllnessRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.ACCELERATED_CRITICAL_ILLNESS_RIDERTERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return acceleratedCriticalIllnessRiderTerm;
+//	}
+//
+//	public static String getAcceleratedCriticalIllnessRiderSumAssured(Document mongoDocument) {
+//		String acceleratedCriticalIllnessRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.ACCELERATED_CRITICAL_ILLNESS_RIDER_SUMASSURED)) {
+//				acceleratedCriticalIllnessRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class)
+//						.get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class).get(StringConstants.ACCELERATED_CRITICAL_ILLNESS_RIDER_SUMASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return acceleratedCriticalIllnessRiderSumAssured;
+//	}
+//
+//	public static String getCABRiderTerm(Document mongoDocument) {
+//		String CABRiderTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.CAB_RIDER_TERM)) {
+//				CABRiderTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.CAB_RIDER_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return CABRiderTerm;
+//	}
+//
+//	public static String getCABRiderSumAssured(Document mongoDocument) {
+//		String CABRiderSumAssured = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.CAB_RIDER_SUMASSURED)) {
+//				CABRiderSumAssured = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.CAB_RIDER_SUMASSURED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return CABRiderSumAssured;
+//	}
+//
+//	public static String getCABRiderPremium(Document mongoDocument) {
+//		String CABRiderPremium = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.CAB_RIDER_PREMIUM)) {
+//				CABRiderPremium = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.CAB_RIDER_PREMIUM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return CABRiderPremium;
+//	}
+//
+//	/*
+//	 * public static String getRiderDetails(Document mongoDocument) { String
+//	 * riderDetails = null; try { if
+//	 * (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) &&
+//	 * mongoDocument.getList(StringConstants.PRODUCT_DETAILS,
+//	 * Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO) &&
+//	 * mongoDocument.getList(StringConstants.PRODUCT_DETAILS,
+//	 * Document.class).get(0).get(StringConstants.PRODUCT_INFO,
+//	 * Document.class).containsKey(StringConstants.RIDER_DETAILS)) {
+//	 * riderDetails = mongoDocument.getList(StringConstants.PRODUCT_DETAILS,
+//	 * Document.class).get(0).get(StringConstants.PRODUCT_INFO,
+//	 * Document.class).get(StringConstants.RIDER_DETAILS).toString(); } } catch
+//	 * (Exception ex) {
+//	 * 
+//	 * } return riderDetails; }
+//	 */
+//
+//	public static String getModalPremium(Document mongoDocument) {
+//		String modalPremium = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.MODAL_PREMIUM)) {
+//				modalPremium = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.MODAL_PREMIUM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return modalPremium;
+//	}
+//
+//	public static String getRequiredModalPremium(Document mongoDocument) {
+//		String requiredModalPremium = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.REQUIRED_MODAL_PREMIUM)) {
+//				requiredModalPremium = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.REQUIRED_MODAL_PREMIUM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return requiredModalPremium;
+//	}
+//
+//	public static String getServiceTax(Document mongoDocument) {
+//		String serviceTax = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.SERVICE_TAX)) {
+//				serviceTax = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.SERVICE_TAX).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return serviceTax;
+//	}
+//
+//	public static String getPanNumber(Document mongoDocument) {
+//		String panNumber = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PERSONAL_IDENTIFICATION) && mongoDocument.get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).containsKey(StringConstants.PAN_DETAILS)
+//					&& mongoDocument.get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.PAN_DETAILS, Document.class).containsKey(StringConstants.PAN_NUMBER)) {
+//				panNumber = mongoDocument.get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.PAN_DETAILS, Document.class).get(StringConstants.PAN_NUMBER).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return panNumber;
+//	}
+//
+//	public static List<String> getPanNumberList(Document mongoDocument, int size) {
+//		List<String> panNumberList = null;
+//		try {
+//			panNumberList = new ArrayList<>();
+//			String panNumber = "";
+//			for (int i = 0; i < size; i++) {
+//				if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.PERSONAL_IDENTIFICATION)
+//						&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).containsKey(StringConstants.PAN_DETAILS) && mongoDocument
+//								.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.PAN_DETAILS, Document.class).containsKey(StringConstants.PAN_NUMBER)) {
+//					panNumber = mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.PAN_DETAILS, Document.class)
+//							.get(StringConstants.PAN_NUMBER).toString();
+//					panNumberList.add(panNumber);
+//				} else {
+//					panNumberList.add("");
+//				}
+//
+//			}
+//			System.out.println(panNumberList.size());
+//		} catch (Exception ex) {
+//
+//		}
+//		return panNumberList;
+//	}
+//
+//	public static String getAadharNumber(Document mongoDocument) {
+//		String aadharNumber = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PERSONAL_IDENTIFICATION) && mongoDocument.get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).containsKey(StringConstants.AADHAAR_DETAILS)
+//					&& mongoDocument.get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.AADHAAR_DETAILS, Document.class).containsKey(StringConstants.AADHAAR_NUMBER)) {
+//				aadharNumber = mongoDocument.get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.AADHAAR_DETAILS, Document.class).get(StringConstants.AADHAAR_NUMBER).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return aadharNumber;
+//	}
+//
+//	public static List<String> getAadharNumberList(Document mongoDocument, int size) {
+//		List<String> aadharNumberList = null;
+//		try {
+//			aadharNumberList = new ArrayList<>();
+//			for (int i = 0; i < size; i++) {
+//				if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.PERSONAL_IDENTIFICATION)
+//						&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).containsKey(StringConstants.AADHAAR_DETAILS)
+//						&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.AADHAAR_DETAILS, Document.class)
+//								.containsKey(StringConstants.AADHAAR_NUMBER)) {
+//					String aadharNumber = mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.PERSONAL_IDENTIFICATION, Document.class).get(StringConstants.AADHAAR_DETAILS, Document.class)
+//							.get(StringConstants.AADHAAR_NUMBER).toString();
+//					aadharNumberList.add(aadharNumber);
+//				}
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return aadharNumberList;
+//	}
+//
+//	public static String getMicr(Document mongoDocument) {
+//		String micr = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.BANK) && mongoDocument.get(StringConstants.BANK, Document.class).containsKey(StringConstants.BANK_DETAILS)
+//					&& mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.BANK_DETAILS, Document.class).containsKey(StringConstants.MICR)) {
+//				micr = mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.BANK_DETAILS, Document.class).get(StringConstants.MICR).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return micr;
+//	}
+//
+//	public static String getBankName(Document mongoDocument) {
+//		String bankName = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.BANK) && mongoDocument.get(StringConstants.BANK, Document.class).containsKey(StringConstants.BANK_DETAILS)
+//					&& mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.BANK_DETAILS, Document.class).containsKey(StringConstants.BANK_NAME)) {
+//				bankName = mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.BANK_DETAILS, Document.class).get(StringConstants.BANK_NAME).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return bankName;
+//	}
+//
+//	public static String getBankBranch(Document mongoDocument) {
+//		String bankBranch = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.BANK) && mongoDocument.get(StringConstants.BANK, Document.class).containsKey(StringConstants.BANK_DETAILS)
+//					&& mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.BANK_DETAILS, Document.class).containsKey(StringConstants.BANK_BRANCH)) {
+//				bankBranch = mongoDocument.get(StringConstants.BANK, Document.class).get(StringConstants.BANK_DETAILS, Document.class).get(StringConstants.BANK_BRANCH).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return bankBranch;
+//	}
+//
+//	public static String getNeedOfInsurance(Document mongoDocument) {
+//		String needOfInsurance = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).contains(StringConstants.NEED_OF_INSURANCE)) {
+//				needOfInsurance = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get((StringConstants.NEED_OF_INSURANCE)).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return needOfInsurance;
+//	}
+//
+//	public static String getPremiumPaymentTerm(Document mongoDocument) {
+//		String premiumPaymentTerm = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.PREMIUM_PAYMENT_TERM)) {
+//				premiumPaymentTerm = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.PREMIUM_PAYMENT_TERM).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return premiumPaymentTerm;
+//	}
+//
+//	public static List<String> getRiderInfo(Document mongoDocument, int size) {
+//		List<String> riderInfoList = null;
+//		int riderInfoSize = 0;
+//		try {
+//			riderInfoList = new ArrayList<>();
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.RIDER_DETAILS)) {
+//				riderInfoSize = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).getList(StringConstants.RIDER_DETAILS, Document.class).size();
+//				for (int i = 0; i < riderInfoSize; i++) {
+//					if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//							&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.RIDER_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).getList(StringConstants.RIDER_DETAILS, Document.class).get(i)
+//									.containsKey(StringConstants.RIDER_INFO)) {
+//						riderInfoList.add(mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).getList(StringConstants.RIDER_DETAILS, Document.class).get(i)
+//								.get(StringConstants.RIDER_INFO).toString());
+//					}
+//				}
+//			}
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		}
+//		return riderInfoList;
+//	}
+//
+//	public static String getProductName(Document mongoDocument) {
+//		String productName = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCTNAME)) {
+//				productName = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCTNAME).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return productName;
+//	}
+//
+//	public static String getPremiumType(Document mongoDocument) {
+//		String premiumType = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PREMIUM_TYPE)) {
+//				premiumType = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PREMIUM_TYPE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return premiumType;
+//	}
+//
+//	public static String getAgentId(Document mongoDocument) {
+//		String agentId = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.SOURCING_DETAILS) && mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).containsKey(StringConstants.AGENT_ID)) {
+//				agentId = mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.AGENT_ID).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return agentId;
+//	}
+//
+//	public static String getAgentName(Document mongoDocument) {
+//		String agentName = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.SOURCING_DETAILS) && mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).containsKey(StringConstants.AGENT_NAME)) {
+//				agentName = mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.AGENT_NAME).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return agentName;
+//	}
+//
+//	public static String getSpecifiedPersonCode(Document mongoDocument) {
+//		String specifiedPersonCode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.SOURCING_DETAILS) && mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).containsKey(StringConstants.SPECIFIED_PERSONCODE)) {
+//				specifiedPersonCode = mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.SPECIFIED_PERSONCODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return specifiedPersonCode;
+//	}
+//
+//	public static String getSpCode(Document mongoDocument) {
+//		String spCode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.SOURCING_DETAILS) && mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).containsKey(StringConstants.SPECIFIED_PERSON_DETAILS)
+//					&& mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.SPECIFIED_PERSON_DETAILS, Document.class).containsKey(StringConstants.SP_CODE)) {
+//				spCode = mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.SPECIFIED_PERSON_DETAILS, Document.class).get(StringConstants.SP_CODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return spCode;
+//	}
+//
+//	public static String getGoCABrokerCode(Document mongoDocument) {
+//		String goCABrokerCode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.SOURCING_DETAILS) && mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).containsKey(StringConstants.GO_CA_BROKER_CODE)) {
+//				goCABrokerCode = mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.GO_CA_BROKER_CODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return goCABrokerCode;
+//	}
+//
+//	public static String getSpSsnCode(Document mongoDocument) {
+//		String spSsnCode = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.SOURCING_DETAILS) && mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).containsKey(StringConstants.SPECIFIED_PERSONCODE)
+//					&& mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.SPECIFIED_PERSON_DETAILS, Document.class).containsKey(StringConstants.SP_SSNCODE)) {
+//				spSsnCode = mongoDocument.get(StringConstants.SOURCING_DETAILS, Document.class).get(StringConstants.SPECIFIED_PERSON_DETAILS, Document.class).get(StringConstants.SP_SSNCODE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return spSsnCode;
+//	}
+//
+//	public static String getIsRenewelPaymentDone(Document mongoDocument) {
+//		String isRenewelPaymentDone = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.ADDITIONAL_FLAGS) && mongoDocument.get(StringConstants.ADDITIONAL_FLAGS, Document.class).containsKey(StringConstants.IS_RENEWEL_PAYMENTDONE)) {
+//				isRenewelPaymentDone = mongoDocument.get(StringConstants.ADDITIONAL_FLAGS, Document.class).get(StringConstants.IS_RENEWEL_PAYMENTDONE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return isRenewelPaymentDone;
+//	}
+//
+//	public static String getModeOfPayment(Document mongoDocument) {
+//		String modeOfPayment = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.MODE_OF_PAYMENT)) {
+//				modeOfPayment = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.MODE_OF_PAYMENT).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return modeOfPayment;
+//	}
+//
+//	public static String getIsSIOpted(Document mongoDocument) {
+//		String isSIOpted = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.IS_SI_OPTED)) {
+//				isSIOpted = (mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0)).get(StringConstants.IS_SI_OPTED).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return isSIOpted;
+//	}
+//
+//	public static String getProductType(Document mongoDocument) {
+//		String productType = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_TYPE)) {
+//				productType = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_TYPE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return productType;
+//	}
+//
+//	public static String getDeDupeFlag(Document mongoDocument) {
+//		String deDupeFlag = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.DEDUPE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).getList(StringConstants.DEDUPE_DETAILS, Document.class).get(0).containsKey(StringConstants.DEDUPE_FLAG)) {
+//				deDupeFlag = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).getList(StringConstants.DEDUPE_DETAILS, Document.class).get(0).get(StringConstants.DEDUPE_FLAG).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return deDupeFlag;
+//	}
+//
+//	public static String getPreviousPolicyNumber(Document mongoDocument) {
+//		String previousPolicyNumber = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.DEDUPE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).getList(StringConstants.DEDUPE_DETAILS, Document.class).get(0).containsKey(StringConstants.PREVIOUS_POLICY_NUMBER)) {
+//				previousPolicyNumber = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).getList(StringConstants.DEDUPE_DETAILS, Document.class).get(0).get(StringConstants.PREVIOUS_POLICY_NUMBER).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return previousPolicyNumber;
+//	}
+//
+//	public static String getDeDupeClientId(Document mongoDocument) {
+//		String deDupeClientId = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.DEDUPE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).getList(StringConstants.DEDUPE_DETAILS, Document.class).get(0).containsKey(StringConstants.CLIENT_ID)) {
+//				deDupeClientId = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).getList(StringConstants.DEDUPE_DETAILS, Document.class).get(0).get(StringConstants.CLIENT_ID).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return deDupeClientId;
+//	}
+//
+//	public static String getChequeNumber(Document mongoDocument) {
+//		String chequeNumber = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.PAYMENT_CHEQUE_DETAILS) && mongoDocument
+//							.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).containsKey(StringConstants.CHEQUE_NUMBER)) {
+//				chequeNumber = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).get(StringConstants.CHEQUE_NUMBER)
+//						.toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return chequeNumber;
+//	}
+//
+//	public static String getChequeAmount(Document mongoDocument) {
+//		String chequeAmount = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.PAYMENT_CHEQUE_DETAILS) && mongoDocument
+//							.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).containsKey(StringConstants.CHEQUE_AMOUNT)) {
+//				chequeAmount = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).get(StringConstants.CHEQUE_AMOUNT)
+//						.toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return chequeAmount;
+//	}
+//
+//	public static String getChequeMicr(Document mongoDocument) {
+//		String chequeMicr = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.PAYMENT_CHEQUE_DETAILS)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).containsKey(StringConstants.CHEQUE_MICR)) {
+//				chequeMicr = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).get(StringConstants.CHEQUE_MICR)
+//						.toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return chequeMicr;
+//	}
+//
+//	public static String getChequeDate(Document mongoDocument) {
+//		String chequeDate = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.PAYMENT_CHEQUE_DETAILS)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).containsKey(StringConstants.CHEQUE_DATE)) {
+//				chequeDate = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.PAYMENT_CHEQUE_DETAILS, Document.class).get(StringConstants.CHEQUE_DATE)
+//						.toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return chequeDate;
+//	}
+//
+//	public static String getDemandDraftNumber(Document mongoDocument) {
+//		String demandDraftNumber = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PAYMENT_DETAILS) && mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).containsKey(StringConstants.RECEIPT)
+//					&& mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).containsKey(StringConstants.DEMAND_DRAFT_DETAILS) && mongoDocument
+//							.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.DEMAND_DRAFT_DETAILS, Document.class).containsKey(StringConstants.DEMAND_DRAFT_NUMBER)) {
+//				demandDraftNumber = mongoDocument.get(StringConstants.PAYMENT_DETAILS, Document.class).getList(StringConstants.RECEIPT, Document.class).get(0).get(StringConstants.DEMAND_DRAFT_DETAILS, Document.class)
+//						.get(StringConstants.DEMAND_DRAFT_NUMBER).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return demandDraftNumber;
+//	}
+//
+//	public static String getEffectiveDate(Document mongoDocument) {
+//		String effectiveDate = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.PRODUCT_DETAILS) && mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).containsKey(StringConstants.PRODUCT_INFO)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).containsKey(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE)
+//					&& mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//							.containsKey(StringConstants.EFFECTIVE_DATE)) {
+//				effectiveDate = mongoDocument.getList(StringConstants.PRODUCT_DETAILS, Document.class).get(0).get(StringConstants.PRODUCT_INFO, Document.class).get(StringConstants.PRODUCT_ILLUSTRATION_RESPONSE, Document.class)
+//						.get(StringConstants.EFFECTIVE_DATE).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return effectiveDate;
+//	}
+//
+//	public static String getAffulentOrNot(Document mongoDocument) {
+//		String affulentOrNot = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.CIBIL_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).containsKey(StringConstants.AFFULENT_OR_NOT)) {
+//				affulentOrNot = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).get(StringConstants.AFFULENT_OR_NOT).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return affulentOrNot;
+//	}
+//
+//	public static List<BureauResponseDto> getBureauResponse(Document mongoDocument, int size) {
+//		List<BureauResponseDto> bureauResponseDtoList = null;
+//
+//		try {
+//			bureauResponseDtoList = new ArrayList<>();
+//			for (int i = 0; i < size; i++) {
+//				BureauResponseDto bureauResponseDto = new BureauResponseDto();
+//				if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.CIBIL_DETAILS)
+//						&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).containsKey(StringConstants.BUREAU_RESPONSE)
+//						&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).getList(StringConstants.BUREAU_RESPONSE, Document.class).get(i)
+//								.containsKey(StringConstants.SCORE)) {
+//					bureauResponseDto.setScore(mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).getList(StringConstants.BUREAU_RESPONSE, Document.class).get(i)
+//							.get(StringConstants.SCORE).toString());
+//				} else {
+//					bureauResponseDto.setScore("");
+//				}
+//
+//				if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.CIBIL_DETAILS)
+//						&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).containsKey(StringConstants.BUREAU_RESPONSE)
+//						&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).getList(StringConstants.BUREAU_RESPONSE, Document.class).get(i)
+//								.containsKey(StringConstants.SCORE_DATE)) {
+//					bureauResponseDto.setScoreDate(mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).getList(StringConstants.BUREAU_RESPONSE, Document.class).get(i)
+//							.get(StringConstants.SCORE_DATE).toString());
+//				} else {
+//					bureauResponseDto.setScoreDate("");
+//				}
+//				if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.CIBIL_DETAILS)
+//						&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).containsKey(StringConstants.BUREAU_RESPONSE)
+//						&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).getList(StringConstants.BUREAU_RESPONSE, Document.class).get(i)
+//								.containsKey(StringConstants.SCORE_NAME)) {
+//					bureauResponseDto.setScoreName(mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.CIBIL_DETAILS, Document.class).getList(StringConstants.BUREAU_RESPONSE, Document.class).get(i)
+//							.get(StringConstants.SCORE_NAME).toString());
+//				} else {
+//					bureauResponseDto.setScoreName("");
+//				}
+//
+//				bureauResponseDtoList.add(bureauResponseDto);
+//			}
+//
+//		} catch (Exception ex) {
+//			System.out.println(ex);
+//
+//		}
+//		return bureauResponseDtoList;
+//	}
+//
+//	public static String getUnderwritingResult(Document mongoDocument) {
+//		String underwritingResult = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.FINANCIAL_GRID_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.FINANCIAL_GRID_DETAILS, Document.class).containsKey(StringConstants.UNDERWRITING_RESULT)) {
+//				underwritingResult = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.FINANCIAL_GRID_DETAILS, Document.class).get(StringConstants.UNDERWRITING_RESULT).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return underwritingResult;
+//	}
+//
+//	public static String getMedicalGridDetailsResult(Document mongoDocument) {
+//		String result = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MEDICAL_GRID_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MEDICAL_GRID_DETAILS, Document.class).containsKey(StringConstants.RESULT)) {
+//				result = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MEDICAL_GRID_DETAILS, Document.class).get(StringConstants.RESULT).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return result;
+//	}
+//
+//	public static String getMiscellaneousRuleStatusStatus(Document mongoDocument) {
+//		String miscellaneousRuleStatusStatus = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MISCELLANEOUS_RULE_STATUS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MISCELLANEOUS_RULE_STATUS, Document.class).containsKey(StringConstants.STATUS)) {
+//				miscellaneousRuleStatusStatus = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MISCELLANEOUS_RULE_STATUS, Document.class).get(StringConstants.STATUS).toString();
+//			}
+//		} catch (Exception ex) {
+//			System.out.println(ex);
+//		}
+//		return miscellaneousRuleStatusStatus;
+//	}
+//
+//	public static String getValueOfAFYP(Document mongoDocument) {
+//		String valueOfAFYP = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MSA_FSA_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).containsKey(StringConstants.VALUE_OF_AFYP)) {
+//				valueOfAFYP = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).get(StringConstants.VALUE_OF_AFYP).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return valueOfAFYP;
+//	}
+//
+//	public static String getValueOfDD(Document mongoDocument) {
+//		String valueOfDD = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MSA_FSA_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).containsKey(StringConstants.VALUE_OF_DD)) {
+//				valueOfDD = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).get(StringConstants.VALUE_OF_DD).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return valueOfDD;
+//	}
+//
+//	public static String getValueOfFSA(Document mongoDocument) {
+//		String valueOfFSA = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MSA_FSA_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).containsKey(StringConstants.VALUE_OF_FSA)) {
+//				valueOfFSA = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).get(StringConstants.VALUE_OF_FSA).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return valueOfFSA;
+//	}
+//
+//	public static String getValueOfMSA(Document mongoDocument) {
+//		String valueOfMSA = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MSA_FSA_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).containsKey(StringConstants.VALUE_OF_MSA)) {
+//				valueOfMSA = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).get(StringConstants.VALUE_OF_MSA).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return valueOfMSA;
+//	}
+//
+//	public static String getValueOfSUC(Document mongoDocument) {
+//		String valueOfSUC = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.MSA_FSA_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).containsKey(StringConstants.VALUE_OF_SUC)) {
+//				valueOfSUC = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.MSA_FSA_DETAILS, Document.class).get(StringConstants.VALUE_OF_SUC).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return valueOfSUC;
+//	}
+//
+//	public static String getOverallHealthStatus(Document mongoDocument) {
+//		String overallHealthStatus = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.POSV_DETAILS) && mongoDocument.get(StringConstants.POSV_DETAILS, Document.class).containsKey(StringConstants.POSV_STATUS)
+//					&& mongoDocument.get(StringConstants.POSV_DETAILS, Document.class).get(StringConstants.POSV_STATUS, Document.class).containsKey(StringConstants.OVERALL_HEALTH_STATUS)) {
+//				overallHealthStatus = mongoDocument.get(StringConstants.POSV_DETAILS, Document.class).get(StringConstants.POSV_STATUS, Document.class).get(StringConstants.OVERALL_HEALTH_STATUS).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return overallHealthStatus;
+//	}
+//
+//	public static PepDetailsDto getPepDetails(Document mongoDocument) {
+//		PepDetailsDto pepDetailsDto = null;
+//		try {
+//			pepDetailsDto = new PepDetailsDto();
+//			if (mongoDocument.containsKey(StringConstants.EMPLOYMENT_DETAILS) && mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).containsKey(StringConstants.PEP_DETAILS)) {
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.AFFILIATIONS_TO_POLITICAL_PARTY)) {
+//					pepDetailsDto.setAffiliationsToPoliticalparty(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.AFFILIATIONS_TO_POLITICAL_PARTY).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.CONVICTION_DETAILS)) {
+//					pepDetailsDto.setConvictionDetails(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.CONVICTION_DETAILS).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.FOREIGN_OFFICE_DETAILS)) {
+//					pepDetailsDto.setForeignOfficeDetails(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.FOREIGN_OFFICE_DETAILS).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.INCOME_SOURCES)) {
+//					pepDetailsDto.setIncomeSources(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.INCOME_SOURCES).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.IS_FAMILY_MEMBER_PEP)) {
+//					pepDetailsDto.setIsFamilyMemberPEP(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.IS_FAMILY_MEMBER_PEP).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.IS_LI_OR_NOMINEE_PEP)) {
+//					pepDetailsDto.setIsLIOrNomineePEP(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.IS_LI_OR_NOMINEE_PEP).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.IS_LIPEP)) {
+//					pepDetailsDto.setIsLIPEP(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.IS_LIPEP).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.IS_PAY_OR_PEP)) {
+//					pepDetailsDto.setIsPayOrPep(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.IS_PAY_OR_PEP).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.IS_PROPOSER_PEP)) {
+//					pepDetailsDto.setIsProposerPEP(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.IS_PROPOSER_PEP).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.PARTY_IN_POWER)) {
+//					pepDetailsDto.setPartyInPower(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.PARTY_IN_POWER).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.PEP_CONVICTED)) {
+//					pepDetailsDto.setPepConvicted(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.PEP_CONVICTED).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.PEP_EVERPOSTED_IN_FOREIGNOFFICE)) {
+//					pepDetailsDto.setPepEverPostedInForeignOffice(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.PEP_EVERPOSTED_IN_FOREIGNOFFICE).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.POLITICAL_EXPERIENCE)) {
+//					pepDetailsDto.setPoliticalExperience(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.POLITICAL_EXPERIENCE).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.PORT_FOLIO_HANDLED)) {
+//					pepDetailsDto.setPortfolioHandled(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.PORT_FOLIO_HANDLED).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.ROLE_IN_POLITICALPARTY)) {
+//					pepDetailsDto.setRoleInPoliticalParty(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.ROLE_IN_POLITICALPARTY).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.ROLE_OTHERS)) {
+//					pepDetailsDto.setRoleOthers(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.ROLE_OTHERS).toString());
+//				}
+//				if (mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).containsKey(StringConstants.SPECIFY_FAMILY_MEMBERS)) {
+//					pepDetailsDto.setAffiliationsToPoliticalparty(mongoDocument.get(StringConstants.EMPLOYMENT_DETAILS, Document.class).get(StringConstants.PEP_DETAILS, Document.class).get(StringConstants.SPECIFY_FAMILY_MEMBERS).toString());
+//				}
+//
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return pepDetailsDto;
+//	}
+//
+//	public static String getKickoutMsg(Document mongoDocument) {
+//		String kickoutMsg = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.PROPOSAL_FORM_RULE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.PROPOSAL_FORM_RULE_DETAILS, Document.class).containsKey(StringConstants.KICK_OUT_MSG)) {
+//				kickoutMsg = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.PROPOSAL_FORM_RULE_DETAILS, Document.class).get(StringConstants.KICK_OUT_MSG).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return kickoutMsg;
+//	}
+//
+//	public static String getResultFlag(Document mongoDocument) {
+//		String resultFlag = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.PROPOSAL_FORM_RULE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.PROPOSAL_FORM_RULE_DETAILS, Document.class).containsKey(StringConstants.RESULT_FLAG)) {
+//				resultFlag = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.PROPOSAL_FORM_RULE_DETAILS, Document.class).get(StringConstants.RESULT_FLAG).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return resultFlag;
+//	}
+//
+//	public static String getNormalisedScoreURMU(Document mongoDocument) {
+//		String normalisedScoreURMU = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.RISK_SCORE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.RISK_SCORE_DETAILS, Document.class).containsKey(StringConstants.NORMALISED_SCORE_URMU)) {
+//				normalisedScoreURMU = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.RISK_SCORE_DETAILS, Document.class).get(StringConstants.NORMALISED_SCORE_URMU).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return normalisedScoreURMU;
+//	}
+//
+//	public static String getRiskyTagURMU(Document mongoDocument) {
+//		String riskyTagURMU = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.RISK_SCORE_DETAILS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.RISK_SCORE_DETAILS, Document.class).containsKey(StringConstants.RISKY_TAG_URMU)) {
+//				riskyTagURMU = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.RISK_SCORE_DETAILS, Document.class).get(StringConstants.RISKY_TAG_URMU).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return riskyTagURMU;
+//	}
+//
+//	public static String getUnderwritingStatus(Document mongoDocument) {
+//		String underwritingStatus = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.UNDERWRITING_STATUS)) {
+//				underwritingStatus = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.RISK_SCORE_DETAILS, Document.class).get(StringConstants.UNDERWRITING_STATUS).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return underwritingStatus;
+//	}
+//
+//	public static String getUrmuRuleStatusResult(Document mongoDocument) {
+//		String result = null;
+//		try {
+//			if (mongoDocument.containsKey(StringConstants.UNDERWRITING_SERVICE_DETAILS) && mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).containsKey(StringConstants.URMU_RULE_STATUS)
+//					&& mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.URMU_RULE_STATUS, Document.class).containsKey(StringConstants.RESULT)) {
+//				result = mongoDocument.get(StringConstants.UNDERWRITING_SERVICE_DETAILS, Document.class).get(StringConstants.URMU_RULE_STATUS, Document.class).get(StringConstants.RESULT).toString();
+//			}
+//		} catch (Exception ex) {
+//
+//		}
+//		return result;
+//	}
+//
+//	public static List<NomineeDetails> getNomineeDetails(Document mongoDocument, int size) {
+//		List<NomineeDetails> listNomineeDetails = new ArrayList<>();
+//		NomineeDetails nomineeDetailsDto = new NomineeDetails();
+//		try {
+//
+//			for (int i = 0; i < size; i++) {
+//				if (mongoDocument.containsKey(StringConstants.NOMINEE_DETAILS) && mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).containsKey(StringConstants.PARTY_DETAILS)
+//						&& mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).containsKey(StringConstants.FIRSTNAME)) {
+//					nomineeDetailsDto.setNomineeFirstName(mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).get(StringConstants.FIRSTNAME).toString());
+//				}
+//				if (mongoDocument.containsKey(StringConstants.NOMINEE_DETAILS) && mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).containsKey(StringConstants.PARTY_DETAILS)
+//						&& mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).containsKey(StringConstants.LASTNAME)) {
+//					nomineeDetailsDto.setNomineeLastName(mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).get(StringConstants.LASTNAME).toString());
+//				}
+//				if (mongoDocument.containsKey(StringConstants.NOMINEE_DETAILS) && mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).containsKey(StringConstants.PARTY_DETAILS)
+//						&& mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).containsKey(StringConstants.MIDDLE_NAME)) {
+//					nomineeDetailsDto.setNomineeMiddleName(mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).get(StringConstants.MIDDLE_NAME).toString());
+//				}
+//				if (mongoDocument.containsKey(StringConstants.NOMINEE_DETAILS) && mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).containsKey(StringConstants.PARTY_DETAILS)
+//						&& mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).containsKey(StringConstants.RELATIONSHIP_WITH_PROPOSER)) {
+//					nomineeDetailsDto
+//							.setRelationshipWithProposer(mongoDocument.get(StringConstants.NOMINEE_DETAILS, Document.class).getList(StringConstants.PARTY_DETAILS, Document.class).get(size).get(StringConstants.RELATIONSHIP_WITH_PROPOSER).toString());
+//				}
+//
+//				listNomineeDetails.add(nomineeDetailsDto);
+//			}
+//
+//		} catch (Exception ex) {
+//
+//		}
+//		return listNomineeDetails;
+//	}
+//
+//	public static List<PartyInformation> getPartyInformation(Document mongoDocument, int size) {
+//		List<PartyInformation> partyInformationList = null;
+//		List<PartyInfoAddressDetailsDto> partyInfoAddressDetails = null;
+//		int partyInformationSize = 0;
+//		int addressSize = 0;
+//		try {
+//			partyInformationList = new ArrayList<>();
+//			partyInfoAddressDetails = new ArrayList<>();
+//			if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION)) {
+//				partyInformationSize = mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).size();
+//				for (int i = 0; i < partyInformationSize; i++) {
+//					PartyInformation partyInformation = new PartyInformation();
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.FIRSTNAME)) {
+//						partyInformation.setFirstName(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.FIRSTNAME).toString());
+//					} else {
+//						partyInformation.setFirstName("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.LASTNAME)) {
+//						partyInformation.setLastName(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.LASTNAME).toString());
+//					} else {
+//						partyInformation.setLastName("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.GENDER)) {
+//						partyInformation.setGender(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.GENDER).toString());
+//					} else {
+//						partyInformation.setGender("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.MIDDLE_NAME)) {
+//						partyInformation.setMiddleName(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.MIDDLE_NAME).toString());
+//					} else {
+//						partyInformation.setMiddleName("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.ANNUAL_INCOME)) {
+//						partyInformation.setAnnualIncome(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.ANNUAL_INCOME).toString());
+//					} else {
+//						partyInformation.setAnnualIncome("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.OCCUPATION)) {
+//						partyInformation.setOccupation((mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.OCCUPATION).toString()));
+//					} else {
+//						partyInformation.setOccupation("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.DOB)) {
+//						partyInformation.setDob((mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.DOB).toString()));
+//					} else {
+//						partyInformation.setDob("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.NATIONALITY_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.NATIONALITY_DETAILS, Document.class)
+//									.containsKey(StringConstants.NATIONALITY)) {
+//						partyInformation.setNationality(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.NATIONALITY_DETAILS, Document.class)
+//								.get(StringConstants.NATIONALITY).toString());
+//					} else {
+//						partyInformation.setNationality("");
+//					}
+//					if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//							&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.PAN_DETAILS) && mongoDocument
+//									.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.PAN_DETAILS, Document.class).containsKey(StringConstants.CREDIT_SCORE)) {
+//						partyInformation.setCreditScore(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).get(StringConstants.PAN_DETAILS, Document.class)
+//								.get(StringConstants.CREDIT_SCORE).toString());
+//					} else {
+//						partyInformation.setCreditScore("");
+//					}
+//					if (mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.ADDRESS)) {
+//						addressSize = mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS,Document.class).size();
+//						for (int j = 0; j < addressSize; j++) {
+//							PartyInfoAddressDetailsDto partyInfoAddressDetailsDto = new PartyInfoAddressDetailsDto();
+//							if (mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//									.containsKey(StringConstants.ADDRESS_DETAILS)
+//									&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//											.get(StringConstants.ADDRESS_DETAILS, Document.class).containsKey(StringConstants.CITY)) {
+//								partyInfoAddressDetailsDto.setCity(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class)
+//										.get(j).get(StringConstants.ADDRESS_DETAILS, Document.class).get(StringConstants.CITY).toString());
+//							} else {
+//								partyInfoAddressDetailsDto.setCity("");
+//							}
+//							if (mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//									.containsKey(StringConstants.ADDRESS_DETAILS)
+//									&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//											.get(StringConstants.ADDRESS_DETAILS, Document.class).containsKey(StringConstants.PINCODE)) {
+//								partyInfoAddressDetailsDto.setPinCode(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class)
+//										.get(j).get(StringConstants.ADDRESS_DETAILS, Document.class).get(StringConstants.PINCODE).toString());
+//							} else {
+//								partyInfoAddressDetailsDto.setPinCode("");
+//							}
+//
+//							partyInfoAddressDetails.add(partyInfoAddressDetailsDto);
+//						}
+//					}
+//					partyInformation.setAddressDetails(partyInfoAddressDetails);
+//					partyInformationList.add(partyInformation);
+//
+//				}
+//			}
+//			
+//		} catch (Exception ex) {
+//			System.out.println(ex);
+//		}
+//		return partyInformationList;
+//	}
+//
+//	/*public static List<PartyInfoAddressDetailsDto> getPartyInfOAddressDetails(Document mongoDocument, int size) {
+//		List<PartyInfoAddressDetailsDto> partyInfoAddressDetailsList = null;
+//		try {
+//			partyInfoAddressDetailsList = new ArrayList<>();
+//			for (int i = 0; i < size; i++) {
+//				PartyInfoAddressDetailsDto partyInfoAddressDetailsDto = new PartyInfoAddressDetailsDto();
+//				if (mongoDocument.containsKey(StringConstants.PARTYINFORMATION) && mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).containsKey(StringConstants.BASIC_DETAILS)
+//						&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).containsKey(StringConstants.ADDRESS)) {
+//					for (int j = 0; j < 2; j++) {
+//						if (mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//								.containsKey(StringConstants.ADDRESS_DETAILS)
+//								&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//										.get(StringConstants.ADDRESS_DETAILS, Document.class).containsKey(StringConstants.CITY)) {
+//							partyInfoAddressDetailsDto.setCity(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//									.get(StringConstants.ADDRESS_DETAILS, Document.class).get(StringConstants.CITY).toString());
+//						} else {
+//							partyInfoAddressDetailsDto.setCity("");
+//						}
+//						if (mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//								.containsKey(StringConstants.ADDRESS_DETAILS)
+//								&& mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//										.get(StringConstants.ADDRESS_DETAILS, Document.class).containsKey(StringConstants.PINCODE)) {
+//							partyInfoAddressDetailsDto.setCity(mongoDocument.getList(StringConstants.PARTYINFORMATION, Document.class).get(i).get(StringConstants.BASIC_DETAILS, Document.class).getList(StringConstants.ADDRESS, Document.class).get(j)
+//									.get(StringConstants.ADDRESS_DETAILS, Document.class).get(StringConstants.PINCODE).toString());
+//						} else {
+//							partyInfoAddressDetailsDto.setPinCode("");
+//						}
+//
+//						partyInfoAddressDetailsList.add(partyInfoAddressDetailsDto);
+//
+//					}
+//				}
+//			}
+//		}
+//
+//		catch (Exception ex) {
+//
+//		}
+//		return partyInfoAddressDetailsList;
+//	}*/
+//
+//}

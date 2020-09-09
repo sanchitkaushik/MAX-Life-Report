@@ -1,0 +1,22 @@
+package com.maxlifeinsurance.mpro.handler;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.service.EnachBnplReportService;
+import com.maxlifeinsurance.mpro.serviceimpl.EnachBnplReportServiceImpl;
+
+public class EnachBnplReportGenerationHandler {
+
+	EnachBnplReportService enachBnplReportService = new EnachBnplReportServiceImpl();
+
+	public Void handleRequest(Context context) {
+		context.getLogger().log("ENACH-BNPL report handler is starting...");
+		try {
+			boolean response = enachBnplReportService.enachBnplReportGenerationService(context);
+			context.getLogger().log("ENACH-BNPL report generation status is :: " + response);
+		} catch (Exception ex) {
+			context.getLogger().log("Exception while executing ENACH-BNPL report handler :: " + ex.getMessage());
+		}
+		return null;
+	}
+
+}

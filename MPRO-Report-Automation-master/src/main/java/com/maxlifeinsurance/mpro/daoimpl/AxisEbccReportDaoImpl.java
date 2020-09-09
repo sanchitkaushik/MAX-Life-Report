@@ -1,0 +1,92 @@
+package com.maxlifeinsurance.mpro.daoimpl;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.bson.Document;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.config.DbConfig;
+import com.maxlifeinsurance.mpro.dao.AxisEbccReportDao;
+import com.maxlifeinsurance.mpro.dto.Proposal;
+import com.maxlifeinsurance.mpro.utils.Constants;
+import com.maxlifeinsurance.mpro.utils.MultiFormatDate;
+import com.mongodb.client.MongoCollection;
+
+/**
+ * 
+ * @author Vinay
+ *
+ */
+public class AxisEbccReportDaoImpl implements AxisEbccReportDao {
+
+	
+	/**
+	 * @author Vinay
+	 * @param Context
+	 * @return List<Proposal>
+	 * This method will fetch data from database for Axis Ebcc Report Data
+	 */
+	@Override
+	public List<Proposal> getAxisEbccReportData(Context context) {
+		List<Proposal> proposalDocumentList = null;
+		try {
+			MongoCollection<Document> collection = new DbConfig().getDbConnection(context);
+//			Below connectivity is used for testing in local env.
+//			MongoCollection localCollection = new DbConfigForLocal().getDbConnection(mongoDatabaseName).getCollection(mongoCollectionName);
+			Document projection = new Document("_id", 0)
+					.append("applicationDetails.policyNumber", 1)
+					.append("transactionId", 1)
+					.append("applicationDetails.stage", 1)
+					.append("applicationDetails.createdTime", 1)
+					.append("applicationDetails.policyProcessingJourneyStatus", 1)
+					.append("applicationDetails.posvJourneyStatus", 1)
+					.append("channelDetails.branchCode", 1)
+					.append("channelDetails.channel", 1)
+					.append("productDetails.productInfo.productName", 1)
+					.append("sourcingDetails.goCABrokerCode", 1)
+					.append("underwritingServiceDetails.dedupeDetails", 1)
+					.append("underwritingServiceDetails.underwritingStatus.requiredDocuments.brmsId", 1)
+					.append("underwritingServiceDetails.dedupeDetails", 1)
+					.append("underwritingServiceDetails.underwritingStatus.requiredDocuments.channelName", 1)
+					.append("underwritingServiceDetails.underwritingStatus.medicalGridStatus", 1)
+					.append("underwritingServiceDetails.underwritingStatus.financialGridStatus", 1)
+					.append("underwritingServiceDetails.urmuRuleStatus.result", 1)
+					.append("partyInformation.personalIdentification.panDetails.isPanValidated", 1)
+					.append("paymentDetails.receipt.premiumMode", 1)
+					.append("paymentDetails.receipt.isSIOpted", 1)
+					.append("paymentDetails.receipt.paymentDate", 1)
+					.append("paymentDetails.receipt.directPaymentdetails.voucherUpdatedDate", 1)
+					.append("additionalFlags.isPaymentDone", 1)
+					.append("bank.paymentRenewedBy", 1)
+					.append("bancaDetails.bancaId", 1)
+					.append("bancaDetails.leadId", 1)
+					.append("bancaDetails.ukyc", 1)
+					.append("bancaDetails.customerClassification", 1)
+					.append("bancaDetails.isNameModified", 1)
+					.append("bancaDetails.isDOBModified", 1)
+					.append("bancaDetails.isCommAddressModified", 1)
+					.append("bancaDetails.isPanModified", 1)
+					.append("additionalFlags.journeyFieldsModificationStatus.communicationAddStatus", 1)
+					.append("additionalFlags.journeyFieldsModificationStatus.dobStatus", 1)
+					.append("additionalFlags.journeyFieldsModificationStatus.nameStatus", 1)
+					.append("applicationDetails.policyNumber", 1)
+					.append("partyInformation.basicDetails.address.addressDetails", 1)
+					.append("bancaDetails.crmBancaCustomerDetails", 1)
+					.append("bancaDetails.customerId", 1)
+					.append("sourcingDetails.append",1);
+			Document whereCondition = new Document();
+			whereCondition.append("applicationDetails.createdTime",new Document("$gte", MultiFormatDate.formatDateForQuery(context, System.getenv(Constants.FROM_DATE))))
+						  .append("channelDetails.channel", "X");
+			
+			proposalDocumentList = collection.find(whereCondition, Proposal.class).projection(projection).into(new ArrayList<>());
+			context.getLogger().log("Total record count is :: " +proposalDocumentList.size());
+
+		} catch (Exception ex) {
+			context.getLogger().log("Exception occured in getAxisEbccReportData while fetching data from mongo db :: "+ex);
+		}
+		return proposalDocumentList;
+	}
+
+}

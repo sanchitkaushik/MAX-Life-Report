@@ -1,0 +1,1 @@
+'=src/main/java/com/maxlifeinsurance/mpro/dto/BasicDetails.java 2javaX…hr=src/main/java/com/maxlifeinsurance/mpro/dto/BasicDetails.java

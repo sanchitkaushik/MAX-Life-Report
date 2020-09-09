@@ -1,0 +1,184 @@
+package com.maxlifeinsurance.mpro.serviceimpl;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+import java.util.regex.Pattern;
+
+import org.bson.internal.Base64;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.dao.AllGridReportDao;
+import com.maxlifeinsurance.mpro.daoimpl.AllGridReportDaoImpl;
+import com.maxlifeinsurance.mpro.dto.Proposal;
+import com.maxlifeinsurance.mpro.service.AllGridReportService;
+import com.maxlifeinsurance.mpro.service.CommunicationService;
+import com.maxlifeinsurance.mpro.utils.AWSClients;
+import com.maxlifeinsurance.mpro.utils.Constants;
+import com.maxlifeinsurance.mpro.utils.CsvWriteer;
+import com.maxlifeinsurance.mpro.utils.MultiFormatDate;
+import com.maxlifeinsurance.mpro.utils.ReportCreationUtility;
+import com.maxlifeinsurance.mpro.utils.StringUtility;
+import com.opencsv.CSVWriter;
+
+import net.lingala.zip4j.core.ZipFile;
+
+public class AllGridReportServiceImpl implements AllGridReportService {
+
+	
+	@Override
+	public boolean generateAllGridDataReport(Context context) {
+		boolean flag = false;
+		List<Proposal> proposalDocumentsList = null;
+		AllGridReportDao allGridReportDao = null;
+		List<String[]> rowData = null;
+		try {
+			allGridReportDao = new AllGridReportDaoImpl();
+			proposalDocumentsList = allGridReportDao.getAllGridReportData(context);
+			if (proposalDocumentsList != null && !proposalDocumentsList.isEmpty()) {
+				rowData = createAllGridDataRow(proposalDocumentsList,context);
+				flag = CsvWriteer.csvWriter(rowData, Constants.ALL_GRID_DATA, "report.file.headers.allGridData", context);
+			}
+		} catch (Exception ex) {
+			context.getLogger().log("Exception occued while processing All-Grid-Data report :: " + ex);
+		}
+		return flag;
+
+	}
+	
+//	/**
+//	 * 
+//	 * @param listAxisMproReport
+//	 * @param context
+//	 * @return fileSize 
+//	 * This is private method which will create CSV file in respective
+//	 * template for axis-mpro report and than convert the CSV in
+//	 * password protected zip file
+//	 */
+//	private double allGridDataCsvWriter(List<Proposal> proposalDocumentsList, Context context){
+//		double sizeInMb = 0;
+//		FileWriter outputfile = null;
+//		CSVWriter writer = null;
+//		try{
+//			DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy:MM:dd HH:mm:ss");
+//			LocalDateTime toDate = LocalDateTime.now();
+//			file = new File("/tmp" + File.separator + "All GRID DATA Report_" + (dateTimeFormatter.format(toDate)) + ".csv");
+////			file = new File("E://"+File.separator+"Axis Lead Report.csv");
+//			context.getLogger().log("File Path" + file.getAbsolutePath());
+//			outputfile = new FileWriter(file);
+//			writer = new CSVWriter(outputfile);
+//			List<String[]> data = new ArrayList<>();
+//			data.add(res.getString("report.file.headers.allGridData").split(Pattern.quote("||")));
+//			for (Proposal proposal : proposalDocumentsList) {
+//				
+//				String row = StringUtility.checkStringNullOrBlankWithoutCase(MultiFormatDate.formatDateInMongoDateFormat(proposal.getApplicationDetails().getCreatedTime())) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getApplicationDetails().getPolicyNumber()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getApplicationDetails().getStage()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getChannelDetails().getChannel()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getPartyInformation().isEmpty() ? proposal.getPartyInformation().get(0).getPersonalIdentification().getPanDetails().getPanNumber() : "") + "$"
+//					    + StringUtility.checkStringNullOrBlankWithoutCase(proposal.getPartyInformation().size() >=2 ? proposal.getPartyInformation().get(1).getPersonalIdentification().getPanDetails().getPanNumber() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getPartyInformation().size() >=3 ? proposal.getPartyInformation().get(2).getPersonalIdentification().getPanDetails().getPanNumber() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getProductDetails().isEmpty() ? proposal.getProductDetails().get(0).getProductInfo().getProductName() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getAffulentOrNot()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().isEmpty() ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(0).getScore() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().isEmpty() ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(0).getScoreDate() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().isEmpty() ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(0).getScoreName() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().size() >= 2 ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(1).getScore() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().size() >= 2 ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(1).getScoreDate() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().size() >= 2 ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(1).getScoreName() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getDedupeDetails().isEmpty() ? proposal.getUnderwritingServiceDetails().getDedupeDetails().get(0).getDedupeFlag() : "") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getFinancialGridDetails().getUnderwritingResult()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMedicalGridDetails().getResult()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMiscellaneousRuleStatus().getStatus()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfAFYP()+"") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfDD()+"") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfFSA()+"") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfMSA()+"") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfSUC()+"") + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getProposalFormRuleDetails().getKickoutMsg()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getProposalFormRuleDetails().getResultFlag()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getRiskScoreDetails().getNormalisedScoreURMU()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getRiskScoreDetails().getRiskyTagURMU()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getUnderwritingStatus().toString()) + "$"
+//						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getUrmuRuleStatus().getResult());
+//				data.add(row.split(Pattern.quote("$"))); 	
+//			}
+//			writer.writeAll(data);
+//			context.getLogger().log("CSV Created Successfully");
+//			zipFile = ReportCreationUtility.passwordProtectedZip(file, context);
+//			if (zipFile != null) {
+//				context.getLogger().log("Converting csv file to password protected zip file :: " + zipFile);
+//				xmlFileByteArray = ReportCreationUtility.convertExcelIntoByteArray(zipFile.getFile(), context);
+//			}
+//			fileData = Base64.encode(xmlFileByteArray);
+//			long sizeInByte = fileData.length();
+//			sizeInMb = sizeInByte / (1024.00 * 1024.00);
+//			context.getLogger().log("Size of file is :: " + sizeInMb);
+//
+//		}
+//		catch (Exception ex) {
+////			System.out.println(ex);
+//			context.getLogger().log("Exception occured while creating report for ALL-GRID-DATA Report :: " + ex);
+//		} finally {
+//			try {
+//				if (outputfile != null) {
+//					outputfile.close();
+//				}
+//				if (writer != null) {
+//					writer.close();
+//				}
+//			} catch (Exception ex) {
+//				context.getLogger().log("Exception occured while closing object :: " + ex.getMessage());
+//			}
+//		}
+//		return sizeInMb;
+//	}
+	
+	private List<String[]> createAllGridDataRow(List<Proposal> proposalDocumentList, Context context){
+		List<String[]> data = null;
+		try{
+			data = new ArrayList<>();
+				for (Proposal proposal : proposalDocumentList) {
+				String row = StringUtility.checkStringNullOrBlankWithoutCase(MultiFormatDate.formatDateInMongoDateFormat(proposal.getApplicationDetails().getCreatedTime())) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getApplicationDetails().getPolicyNumber()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getApplicationDetails().getStage()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getChannelDetails().getChannel()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getPartyInformation().isEmpty() ? proposal.getPartyInformation().get(0).getPersonalIdentification().getPanDetails().getPanNumber() : "") + "$"
+					    + StringUtility.checkStringNullOrBlankWithoutCase(proposal.getPartyInformation().size() >=2 ? proposal.getPartyInformation().get(1).getPersonalIdentification().getPanDetails().getPanNumber() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getPartyInformation().size() >=3 ? proposal.getPartyInformation().get(2).getPersonalIdentification().getPanDetails().getPanNumber() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getProductDetails().isEmpty() ? proposal.getProductDetails().get(0).getProductInfo().getProductName() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getAffulentOrNot()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().isEmpty() ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(0).getScore() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().isEmpty() ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(0).getScoreDate() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().isEmpty() ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(0).getScoreName() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().size() >= 2 ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(1).getScore() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().size() >= 2 ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(1).getScoreDate() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().size() >= 2 ? proposal.getUnderwritingServiceDetails().getCibilDetails().getBureauResponse().get(1).getScoreName() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(!proposal.getUnderwritingServiceDetails().getDedupeDetails().isEmpty() ? proposal.getUnderwritingServiceDetails().getDedupeDetails().get(0).getDedupeFlag() : "") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getFinancialGridDetails().getUnderwritingResult()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMedicalGridDetails().getResult()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMiscellaneousRuleStatus().getStatus()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfAFYP()+"") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfDD()+"") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfFSA()+"") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfMSA()+"") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getMsaFsaDetails().getValueOfSUC()+"") + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getProposalFormRuleDetails().getKickoutMsg()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getProposalFormRuleDetails().getResultFlag()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getRiskScoreDetails().getNormalisedScoreURMU()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getRiskScoreDetails().getRiskyTagURMU()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getUnderwritingStatus().toString()) + "$"
+						+ StringUtility.checkStringNullOrBlankWithoutCase(proposal.getUnderwritingServiceDetails().getUrmuRuleStatus().getResult());
+				data.add(row.split(Pattern.quote("$"))); 	
+			}		
+		}
+		catch(Exception ex){
+			context.getLogger().log("Exception occured while creating rows of CSV file :: " + ex.getMessage());
+		}
+		return data;
+	}
+}

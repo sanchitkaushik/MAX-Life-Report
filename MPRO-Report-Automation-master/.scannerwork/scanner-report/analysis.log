@@ -1,0 +1,141 @@
+Environment variables:
+  - =::=::\
+  - =F:=F:\MproReportWorkSpace\MPRO-Report-Automation
+  - ALLUSERSPROFILE=C:\ProgramData
+  - APPDATA=C:\Users\admin\AppData\Roaming
+  - APPDIR_PATH=C:\Users\admin\AppData\Roaming\Free Snipping Tool\
+  - COMPUTERNAME=DESKTOP-70N7L0V
+  - ComSpec=C:\Windows\system32\cmd.exe
+  - CommonProgramFiles=C:\Program Files\Common Files
+  - CommonProgramFiles(x86)=C:\Program Files (x86)\Common Files
+  - CommonProgramW6432=C:\Program Files\Common Files
+  - DriverData=C:\Windows\System32\Drivers\DriverData
+  - ERROR_CODE=0
+  - HOMEDRIVE=C:
+  - HOMEPATH=\Users\admin
+  - JAVA_EXEC="E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin\..\jre\bin\java.exe"
+  - JAVA_HOME=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin\..\jre
+  - LOCALAPPDATA=C:\Users\admin\AppData\Local
+  - LOGONSERVER=\\DESKTOP-70N7L0V
+  - NUMBER_OF_PROCESSORS=4
+  - OS=Windows_NT
+  - OneDrive=C:\Users\admin\OneDrive
+  - PATHEXT=.COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC
+  - PROCESSOR_ARCHITECTURE=AMD64
+  - PROCESSOR_IDENTIFIER=Intel64 Family 6 Model 69 Stepping 1, GenuineIntel
+  - PROCESSOR_LEVEL=6
+  - PROCESSOR_REVISION=4501
+  - PROJECT_HOME=F:\MproReportWorkSpace\MPRO-Report-Automation
+  - PROMPT=$P$G
+  - PSModulePath=C:\Program Files\WindowsPowerShell\Modules;C:\Windows\system32\WindowsPowerShell\v1.0\Modules
+  - PUBLIC=C:\Users\Public
+  - Path=C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Java\jdk1.8.0_152\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\MinGW\msys\1.0\bin;C:\HashiCorp\Vagrant\bin;E:\Softwares\apache-maven-3.6.3\bin;C:\Program Files\Git\cmd;E:\Softwares\Sonar\sonar-scanner-4.4.0.2170-windows\bin;E:\Softwares\Sonar-SetUp\sonarqube-7.1\bin;E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin;C:\Users\admin\AppData\Local\Microsoft\WindowsApps;E:\Softwares\apache-maven-3.6.3\bin;
+  - ProgramData=C:\ProgramData
+  - ProgramFiles=C:\Program Files
+  - ProgramFiles(x86)=C:\Program Files (x86)
+  - ProgramW6432=C:\Program Files
+  - SESSIONNAME=Console
+  - SONAR_SCANNER_HOME=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin\..
+  - SystemDrive=C:
+  - SystemRoot=C:\Windows
+  - TEMP=C:\Users\admin\AppData\Local\Temp
+  - TMP=C:\Users\admin\AppData\Local\Temp
+  - USERDOMAIN=DESKTOP-70N7L0V
+  - USERDOMAIN_ROAMINGPROFILE=DESKTOP-70N7L0V
+  - USERNAME=admin
+  - USERPROFILE=C:\Users\admin
+  - VBOX_MSI_INSTALL_PATH=C:\Program Files\Oracle\VirtualBox\
+  - scriptdir=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin
+  - sonar-path=E:\Softwares\Sonar\sonarqube-8.4.1.35646\bin\windows-x86-64
+  - sonar-scanner-path=E:\Softwares\Sonar\sonar-scanner-4.4.0.2170-windows\bin
+  - use_embedded_jre=true
+  - windir=C:\Windows
+System properties:
+  - awt.toolkit=sun.awt.windows.WToolkit
+  - file.encoding=Cp1252
+  - file.separator=\
+  - java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment
+  - java.awt.headless=true
+  - java.awt.printerjob=sun.awt.windows.WPrinterJob
+  - java.class.path=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin\..\lib\sonar-scanner-cli-4.4.0.2170.jar
+  - java.class.version=55.0
+  - java.home=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\jre
+  - java.io.tmpdir=C:\Users\admin\AppData\Local\Temp\
+  - java.library.path=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\jre\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\ProgramData\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\Program Files\Java\jdk1.8.0_152\bin;C:\Program Files\MongoDB\Server\4.2\bin;C:\MinGW\msys\1.0\bin;C:\HashiCorp\Vagrant\bin;E:\Softwares\apache-maven-3.6.3\bin;C:\Program Files\Git\cmd;E:\Softwares\Sonar\sonar-scanner-4.4.0.2170-windows\bin;E:\Softwares\Sonar-SetUp\sonarqube-7.1\bin;E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin;C:\Users\admin\AppData\Local\Microsoft\WindowsApps;E:\Softwares\apache-maven-3.6.3\bin;;.
+  - java.runtime.name=OpenJDK Runtime Environment
+  - java.runtime.version=11.0.3+7
+  - java.specification.name=Java Platform API Specification
+  - java.specification.vendor=Oracle Corporation
+  - java.specification.version=11
+  - java.vendor=AdoptOpenJDK
+  - java.vendor.url=https://adoptopenjdk.net/
+  - java.vendor.url.bug=https://github.com/AdoptOpenJDK/openjdk-build/issues
+  - java.vendor.version=AdoptOpenJDK
+  - java.version=11.0.3
+  - java.version.date=2019-04-16
+  - java.vm.compressedOopsMode=32-bit
+  - java.vm.info=mixed mode
+  - java.vm.name=OpenJDK 64-Bit Server VM
+  - java.vm.specification.name=Java Virtual Machine Specification
+  - java.vm.specification.vendor=Oracle Corporation
+  - java.vm.specification.version=11
+  - java.vm.vendor=AdoptOpenJDK
+  - java.vm.version=11.0.3+7
+  - jdk.debug=release
+  - line.separator=
+
+  - os.arch=amd64
+  - os.name=Windows 10
+  - os.version=10.0
+  - path.separator=;
+  - project.home=F:\MproReportWorkSpace\MPRO-Report-Automation
+  - scanner.home=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\bin\..
+  - sun.arch.data.model=64
+  - sun.boot.library.path=E:\Softwares\Sonar-SetUp\sonar-scanner-4.4.0.2170-windows\jre\bin
+  - sun.cpu.endian=little
+  - sun.cpu.isalist=amd64
+  - sun.desktop=windows
+  - sun.io.unicode.encoding=UnicodeLittle
+  - sun.java.command=org.sonarsource.scanner.cli.Main -X
+  - sun.java.launcher=SUN_STANDARD
+  - sun.jnu.encoding=Cp1252
+  - sun.management.compiler=HotSpot 64-Bit Tiered Compilers
+  - sun.os.patch.level=
+  - sun.stderr.encoding=cp437
+  - sun.stdout.encoding=cp437
+  - user.country=IN
+  - user.dir=F:\MproReportWorkSpace\MPRO-Report-Automation
+  - user.home=C:\Users\admin
+  - user.language=en
+  - user.name=admin
+  - user.script=
+  - user.timezone=Asia/Calcutta
+  - user.variant=
+SonarQube plugins:
+  - SonarC# 7.0.1.4822 (csharp)
+  - SonarPython 1.9.1.2080 (python)
+  - SonarJava 5.2.0.13398 (java)
+  - Git 1.4.0.1037 (scmgit)
+  - SonarFlex 2.4.0.1222 (flex)
+  - SonarXML 1.5.0.1373 (xml)
+  - SonarPHP 2.13.0.3107 (php)
+  - SonarTS 1.6.0.2388 (typescript)
+  - Svn 1.7.0.1017 (scmsvn)
+  - SonarJS 4.1.0.6085 (javascript)
+Global properties:
+  - sonar.core.id=AXQR-jSo2Gg6J8zvZ8Rq
+  - sonar.core.startTime=2020-08-21T22:34:02+0530
+Settings for module: JavaProject
+  - sonar.host.url=http://localhost:9000
+  - sonar.java.binaries=F:/MproReportWorkSpace/MPRO-Report-Automation/target/classes
+  - sonar.language=java
+  - sonar.projectBaseDir=F:\MproReportWorkSpace\MPRO-Report-Automation
+  - sonar.projectKey=JavaProject
+  - sonar.projectName=MproReport
+  - sonar.projectVersion=1.0
+  - sonar.scanner.app=ScannerCLI
+  - sonar.scanner.appVersion=4.4.0.2170
+  - sonar.sourceEncoding=windows-1252
+  - sonar.sources=F:/MproReportWorkSpace/MPRO-Report-Automation/src/main
+  - sonar.verbose=true
+  - sonar.working.directory=F:\MproReportWorkSpace\MPRO-Report-Automation\.scannerwork

@@ -1,0 +1,33 @@
+package com.maxlifeinsurance.mpro.utils;
+
+public class Queries {
+	
+	public static final String POLICY_NUMBER = "applicationDetails.policyNumber";
+	public static final String TRANSACTION_ID = "transactionId";
+	public static final String STAGE = "applicationDetails.stage";
+	public static final String CREATED_DATE = "applicationDetails.createdTime";
+	public static final String BRANCH_CODE = "channelDetails.branchCode";
+	public static final String FIRST_NAME = "partyInformation.basicDetails.firstName";
+	public static final String BANCA_LEADID= "bancaDetails.leadId";
+	public static final String CHANNEL = "channelDetails.channel";
+	
+//			applicationDetails.posvJourneyStatus,
+//			partyInformation.basicDetails.lastName,
+//			paymentDetails.receipt.premiumMode,
+//			bank.paymentRenewedBy,
+//			additionalFlags.isPaymentDone,
+//			sourcingDetails.specifiedPersonDetails.spSSNCode,
+//			productDetails.productInfo.productIllustrationResponse.afyp,
+//			productDetails.productInfo.productIllustrationResponse.atp,
+//			productDetails.productInfo.productName,
+//			productDetails.productInfo.planCode,
+//			productDetails.productInfo.planCodeTPP,
+//			bancaDetails.customerId,
+//			bancaDetails.leadId,
+//			productDetails.productInfo.productIllustrationResponse.modalPremium,
+//			productDetails.productInfo.productIllustrationResponse.premiumPaymentTerm,
+//			productDetails.productInfo.productIllustrationResponse.coverageTerm,
+//			sourcingDetails.agentId,
+//			sourcingDetails.specifiedPersonCode
+
+}

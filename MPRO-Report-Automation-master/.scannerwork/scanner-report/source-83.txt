@@ -1,0 +1,5 @@
+package com.maxlifeinsurance.mpro.handler;
+
+public class AxisEbccReportGenerationHandler {
+
+}

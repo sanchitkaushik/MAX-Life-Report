@@ -1,0 +1,1 @@
+8=src/main/java/com/maxlifeinsurance/mpro/dto/PartyDetails.java 2javaX.hr=src/main/java/com/maxlifeinsurance/mpro/dto/PartyDetails.java

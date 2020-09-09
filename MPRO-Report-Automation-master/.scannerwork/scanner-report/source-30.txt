@@ -1,0 +1,52 @@
+package com.maxlifeinsurance.mpro.daoimpl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.bson.Document;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.config.DbConfig;
+import com.maxlifeinsurance.mpro.config.DbConfigForLocal;
+import com.maxlifeinsurance.mpro.dao.YblRaIdReportDao;
+import com.maxlifeinsurance.mpro.dto.Proposal;
+import com.maxlifeinsurance.mpro.utils.Constants;
+import com.maxlifeinsurance.mpro.utils.MultiFormatDate;
+import com.mongodb.client.MongoCollection;
+
+public class YblRaIdReportDaoImpl implements YblRaIdReportDao {
+
+	static ResourceBundle res = ResourceBundle.getBundle("application");
+	static String mongoDatabaseName = res.getString("mongoDatabaseName");
+	static String mongoCollectionName = res.getString("mongoCollectionName");
+	
+	@Override
+	public List<Proposal> getYblRaIdData(Context context) {
+
+		List<Proposal> proposalDocumentList = null;
+		try {
+			MongoCollection<Document> collection = new DbConfig().getDbConnection(mongoDatabaseName, context);
+//			Below connectivity is used for testing in local env.
+//			MongoCollection<Document> collection = new DbConfigForLocal().getDbConnection(mongoDatabaseName);
+			Document projection = new Document("_id", 0)
+					.append("sourcingDetails.regionalAdvisorId", 1)
+					.append("sourcingDetails.specifiedPersonCode", 1)
+					.append("applicationDetails.policyNumber", 1)
+					.append("sourcingDetails.agentId", 1)
+					.append("channelDetails.channel", 1)
+					.append("applicationDetails.stage", 1);
+					
+			Document whereCondition = new Document();
+			whereCondition.append("channelDetails.channel", "BY")
+						  .append("applicationDetails.stage", new Document("$in",Arrays.asList(res.getString("ybl.ra.id.stages").split(","))));
+			proposalDocumentList = collection.find(whereCondition, Proposal.class).projection(projection).into(new ArrayList<>());
+			context.getLogger().log("Total record count is :: " +proposalDocumentList.size());
+		} catch (Exception ex) {
+			context.getLogger().log("Exception occured in getYblRaIdData while fetching data from mongo db :: "+ex);
+		}
+		return proposalDocumentList;
+	}
+
+}

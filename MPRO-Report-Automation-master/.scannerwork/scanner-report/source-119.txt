@@ -1,0 +1,153 @@
+package com.maxlifeinsurance.mpro.utils;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.AWSStaticCredentialsProvider;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Regions;
+import com.amazonaws.services.cloudfront.AmazonCloudFrontClient;
+import com.amazonaws.services.elastictranscoder.AmazonElasticTranscoderClient;
+import com.amazonaws.services.s3.AmazonS3;
+import com.amazonaws.services.s3.AmazonS3ClientBuilder;
+import com.amazonaws.services.sqs.AmazonSQS;
+import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
+import com.maxlifeinsurance.mpro.enums.CLIENT_ID;
+
+ 
+public class ConnectionUtil {
+	
+	private static final String LIGHTX_STG_AWS_SECRET_KEY = "LIGHTX_STG_AWS_SECRET_KEY";
+	private static final String LIGHTX_STG_AWS_ACCESS_KEY = "LIGHTX_STG_AWS_ACCESS_KEY";
+	
+	private static final String LIGHTX_AWS_SECRET_KEY = "LIGHTX_AWS_SECRET_KEY";
+	private static final String LIGHTX_AWS_ACCESS_KEY = "LIGHTX_AWS_ACCESS_KEY";
+	
+	private static final String STORYZ_AWS_ACCESS_KEY = "STORYZ_AWS_ACCESS_KEY";
+	private static final String STORYZ_AWS_SECRET_KEY = "STORYZ_AWS_SECRET_KEY";
+	
+	private static final String PHOTOLEAF_AWS_ACCESS_KEY = "PHOTOLEAF_AWS_ACCESS_KEY";
+	private static final String PHOTOLEAF_AWS_SECRET_KEY = "PHOTOLEAF_AWS_SECRET_KEY";
+	
+	private static final String LIGHTX_STG_CLOUDFRONT_DISTRIBUTION_ID = "LIGHTX_STG_CLOUDFRONT_DISTRIBUTION_ID";
+	private static final String LIGHTX_CLOUDFRONT_DISTRIBUTION_ID = "LIGHTX_CLOUDFRONT_DISTRIBUTION_ID";
+	private static final String STORYZ_CLOUDFRONT_DISTRIBUTION_ID = "STORYZ_CLOUDFRONT_DISTRIBUTION_ID";
+	private static final String PHOTOLEAF_CLOUDFRONT_DISTRIBUTION_ID = "PHOTOLEAF_CLOUDFRONT_DISTRIBUTION_ID";
+	
+	private static final String ACCESS_KEY = "ACCESS_KEY";
+	private static final String SECRET_KEY = "SECRET_KEY";
+	
+	public static AmazonS3 getS3Client(CLIENT_ID clientId, Regions region) {
+		AmazonS3 s3Client = null;
+		Map<String, String> keys = getKeys(clientId);
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys.get(ACCESS_KEY), keys.get(SECRET_KEY));
+		s3Client = AmazonS3ClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+				.withRegion(region).build();
+		return s3Client;
+	}
+	
+	public static AmazonCloudFrontClient getCloudFrontClient(CLIENT_ID clientId, Regions region) {
+		Map<String, String> keys = getKeys(clientId);
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys.get(ACCESS_KEY), keys.get(SECRET_KEY));
+		AWSCredentials awsCredentials = new AWSStaticCredentialsProvider(awsCreds).getCredentials();
+		AmazonCloudFrontClient client = new AmazonCloudFrontClient(awsCredentials);
+		
+		return client;
+	}
+	
+	public static AmazonElasticTranscoderClient getElasticTrasnClient(CLIENT_ID clientId) {
+		AmazonElasticTranscoderClient  elasticTransClient = null;
+		Map<String, String> keys = getKeys(clientId);
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys.get(ACCESS_KEY), keys.get(SECRET_KEY));
+		elasticTransClient = new AmazonElasticTranscoderClient(awsCreds);
+		return elasticTransClient;
+	}
+	
+	public static AmazonSQS getSQSClient(CLIENT_ID clientId, Regions region) {
+		
+		AmazonSQS sqsClient = null;
+		Map<String, String> keys = getKeys(clientId);
+		BasicAWSCredentials awsCreds = new BasicAWSCredentials(keys.get(ACCESS_KEY), keys.get(SECRET_KEY));
+		sqsClient = AmazonSQSClientBuilder.standard().withCredentials(new AWSStaticCredentialsProvider(awsCreds))
+				.withRegion(region).build();
+		return sqsClient;
+	}
+	
+	public static String getCloudFrontDistributionId(CLIENT_ID clientId) {
+		
+		return getDistributionId(clientId);
+	}
+	
+	private static Map<String, String> getKeys(CLIENT_ID clientId) {
+		
+		Map<String, String> keyMap = new HashMap<>(2);
+		String accessKey;
+		String secretKey;
+		
+		switch (clientId) {
+		
+			case POSV_DEV:
+				accessKey = PropertiesUtil.getProperty(LIGHTX_STG_AWS_ACCESS_KEY);
+				secretKey = PropertiesUtil.getProperty(LIGHTX_STG_AWS_SECRET_KEY);
+				keyMap.put(ACCESS_KEY, accessKey);
+				keyMap.put(SECRET_KEY, secretKey);
+				break;
+				
+			case POSV_PROD:
+				accessKey = PropertiesUtil.getProperty(LIGHTX_AWS_ACCESS_KEY);
+				secretKey = PropertiesUtil.getProperty(LIGHTX_AWS_SECRET_KEY);
+				keyMap.put(ACCESS_KEY, accessKey);
+				keyMap.put(SECRET_KEY, secretKey);
+				break;
+				
+			case POSV_STG:
+				accessKey = PropertiesUtil.getProperty(STORYZ_AWS_ACCESS_KEY);
+				secretKey = PropertiesUtil.getProperty(STORYZ_AWS_SECRET_KEY);
+				keyMap.put(ACCESS_KEY, accessKey);
+				keyMap.put(SECRET_KEY, secretKey);
+				break;
+				
+			case POSV_SIT:
+				accessKey = PropertiesUtil.getProperty(PHOTOLEAF_AWS_ACCESS_KEY);
+				secretKey = PropertiesUtil.getProperty(PHOTOLEAF_AWS_SECRET_KEY);
+				keyMap.put(ACCESS_KEY, accessKey);
+				keyMap.put(SECRET_KEY, secretKey);
+				break;	
+	
+			default:
+				break;
+		}
+		return keyMap;
+	}
+	
+	
+    private static String getDistributionId(CLIENT_ID clientId) {
+		
+		String distributionId = null;
+		
+		switch (clientId) {
+		
+		case POSV_SIT:
+			distributionId = PropertiesUtil.getProperty(LIGHTX_STG_CLOUDFRONT_DISTRIBUTION_ID);
+			break;
+			
+		case POSV_STG:
+			distributionId = PropertiesUtil.getProperty(LIGHTX_CLOUDFRONT_DISTRIBUTION_ID);
+			break;
+			
+		case POSV_PROD:
+			distributionId = PropertiesUtil.getProperty(STORYZ_CLOUDFRONT_DISTRIBUTION_ID);
+			break;
+			
+		case POSV_DEV:
+			distributionId = PropertiesUtil.getProperty(PHOTOLEAF_CLOUDFRONT_DISTRIBUTION_ID);
+			break;	
+
+		default:
+			break;
+		}
+		
+		return distributionId;
+	}
+}

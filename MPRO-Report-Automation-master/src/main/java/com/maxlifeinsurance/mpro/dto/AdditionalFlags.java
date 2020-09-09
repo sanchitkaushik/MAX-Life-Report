@@ -1,0 +1,46 @@
+package com.maxlifeinsurance.mpro.dto;
+
+import java.io.Serializable;
+
+/**
+ * 
+ * @author Qualtech
+ *
+ */
+public class AdditionalFlags implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private boolean isPaymentDone;
+	private boolean isRenewelPaymentDone;
+	private JourneyFieldsModificationStatus journeyFieldsModificationStatus;
+
+	public JourneyFieldsModificationStatus getJourneyFieldsModificationStatus() {
+		if(journeyFieldsModificationStatus != null){
+		return journeyFieldsModificationStatus;
+		}
+		else{
+			return new JourneyFieldsModificationStatus();
+		}
+	}
+
+	public void setJourneyFieldsModificationStatus(JourneyFieldsModificationStatus journeyFieldsModificationStatus) {
+		this.journeyFieldsModificationStatus = journeyFieldsModificationStatus;
+	}
+
+	public boolean isPaymentDone() {
+		return isPaymentDone;
+	}
+
+	public void setPaymentDone(boolean isPaymentDone) {
+		this.isPaymentDone = isPaymentDone;
+	}
+
+	public boolean isRenewelPaymentDone() {
+		return isRenewelPaymentDone;
+	}
+
+	public void setRenewelPaymentDone(boolean isRenewelPaymentDone) {
+		this.isRenewelPaymentDone = isRenewelPaymentDone;
+	}
+
+}

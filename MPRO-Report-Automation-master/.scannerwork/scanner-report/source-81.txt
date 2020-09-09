@@ -1,0 +1,22 @@
+package com.maxlifeinsurance.mpro.handler;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.service.AllGridReportService;
+import com.maxlifeinsurance.mpro.serviceimpl.AllGridReportServiceImpl;
+
+public class AllGridDataReportGenerationHandler {
+
+	AllGridReportService allGridReportService = new AllGridReportServiceImpl();
+
+	public Void handleRequest(Context context) {
+		context.getLogger().log("All-Grid-Data report handler is starting...");
+		try {
+			Boolean response = allGridReportService.generateAllGridDataReport(context);
+			context.getLogger().log("All-Grid-Data report generation status is :: " + response);
+		} catch (Exception ex) {
+			context.getLogger().log("Exception while executing All-Grid-Data report handler :: " + ex.getMessage());
+		}
+		return null;
+	}
+
+}

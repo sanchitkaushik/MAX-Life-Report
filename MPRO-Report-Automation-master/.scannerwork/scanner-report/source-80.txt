@@ -1,0 +1,22 @@
+package com.maxlifeinsurance.mpro.handler;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.service.AslAndPeerlessReportService;
+import com.maxlifeinsurance.mpro.serviceimpl.AslAndPeerlessReportServiceImpl;
+
+public class AslAndPeerlessReportGenerationHandler {
+
+	AslAndPeerlessReportService aslAndPeerlessReportService = new AslAndPeerlessReportServiceImpl();
+
+	public Void handleRequest(Context context) {
+		context.getLogger().log("Asl & PeerLess report handler is starting...");
+		try {
+			boolean status = aslAndPeerlessReportService.generateAslAndPeerlessReport(context);
+			context.getLogger().log("Asl & PeerLess report generation status is :: " + status);
+		} catch (Exception ex) {
+			context.getLogger().log("Exception while executing Asl & PeerLess report handler :: " + ex.getMessage());
+		}
+		return null;
+	}
+
+}

@@ -1,0 +1,101 @@
+package com.maxlifeinsurance.mpro.daoimpl;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import org.bson.Document;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.config.DbConfig;
+import com.maxlifeinsurance.mpro.dao.AslAndPeerlessReportDao;
+import com.maxlifeinsurance.mpro.dto.Proposal;
+import com.maxlifeinsurance.mpro.utils.MultiFormatDate;
+import com.maxlifeinsurance.mpro.utils.StringConstants;
+import com.mongodb.client.MongoCollection;
+
+/**
+ * 
+ * @author Vinay
+ *
+ */
+public class AslAndPeerlessReportDaoImpl implements AslAndPeerlessReportDao {
+	
+	
+	/**
+	 * @author Vinay
+	 * @param Context
+	 * @return List<Proposal>
+	 * This method will fetch data from database for Asl & Peerless Data Report
+	 */
+	@Override
+	public List<Proposal> getAslPeerlessData(Context context) {
+		List<Proposal> proposalDocumentsList = null;
+		try {
+			MongoCollection<Document> collection = new DbConfig().getDbConnection(context);
+//          Below connectivity is used for testing in local env.
+//			MongoCollection<Document> collection = new DbConfigForLocal().getDbConnection(mongoDatabaseName);
+			 Document projection = new Document("_id", 0)
+					.append("applicationDetails.policyNumber", 1)
+					.append("applicationDetails.posvJourneyStatus", 1)
+					.append("applicationDetails.stage", 1)
+					.append("bank.paymentRenewedBy", 1)
+					.append("paymentDetails.receipt.premiumMode", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.afyp", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.atp", 1)
+					.append("productDetails.productInfo.productName", 1)
+					.append("productDetails.productType", 1)
+					.append("sourcingDetails.agentId", 1)
+					.append("sourcingDetails.agentName", 1)
+					.append("sourcingDetails.specifiedPersonCode", 1)
+					.append("sourcingDetails.specifiedPersonDetails.spCode", 1)
+					.append("sourcingDetails.goCABrokerCode", 1)
+					.append("underwritingServiceDetails.dedupeDetails.dedupeFlag", 1)
+					.append("underwritingServiceDetails.dedupeDetails.clientId", 1)
+					.append("paymentDetails.receipt.paymentChequeDetails.chequeNumber", 1)
+					.append("paymentDetails.receipt.demandDraftDetails.demandDraftNumber", 1)
+					.append("partyInformation.basicDetails.firstName", 1)
+					.append("partyInformation.basicDetails.lastName", 1)
+					.append("partyInformation.basicDetails.gender", 1)
+					.append("partyInformation.basicDetails.middleName", 1)
+					.append("partyInformation.basicDetails.annualIncome", 1)
+					.append("partyInformation.basicDetails.dob", 1)
+					.append("channelDetails.channel", 1)
+					.append("channelDetails.originalChannel", 1)
+					.append("bank.paymentRenewedBy", 1)
+					.append("partyInformation.basicDetails.marriageDetails.maritalStatus", 1)
+					.append("partyInformation.basicDetails.education", 1)
+					.append("partyInformation.basicDetails.relationshipWithProposer", 1)
+					.append("partyInformation.basicDetails.nationalityDetails.nationality", 1)
+					.append("nomineeDetails.partyDetails.firstName", 1)
+					.append("nomineeDetails.partyDetails.lastName", 1)
+					.append("nomineeDetails.partyDetails.middleName", 1)
+					.append("nomineeDetails.partyDetails.relationshipWithProposer", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.effectiveDate", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.coverageTerm", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.sumAssured", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.modalPremium", 1)
+					.append("productDetails.productInfo.productIllustrationResponse.serviceTax", 1)
+					.append("personalIdentification.panDetails.panNumber", 1)
+					.append("personalIdentification.aadhaarDetails.aadhaarNumber", 1)
+					.append("bank.bankDetails.micr", 1)
+					.append("bank.bankDetails.bankName", 1)
+					.append("bank.bankDetails.bankBranch", 1)
+					.append("productDetails.needOfInsurance", 1)
+					.append("paymentDetails.receipt.isSIOpted", 1);
+
+			Document whereCondition = new Document();
+			whereCondition.append("applicationDetails.createdTime", new Document(StringConstants.GREATER_THEN_EQUALS_TO, MultiFormatDate.getPreviousMonthDate(context)))
+					      .append("applicationDetails.stage", new Document(StringConstants.DOLLAR_IN, Arrays.asList(System.getenv(StringConstants.STAGES).split(StringConstants.COMMA))))
+					      .append("channelDetails.originalChannel", new Document(StringConstants.DOLLAR_IN, Arrays.asList(System.getenv(StringConstants.ORIGINAL_CHANNEL).split(StringConstants.COMMA))));
+			proposalDocumentsList = collection.find(whereCondition, Proposal.class).projection(projection).into(new ArrayList<>());
+			context.getLogger().log("Total record count is :: " +proposalDocumentsList.size());
+
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			context.getLogger().log("Exception occured in getAslPeerlessData while fetching data from mongo db :: " + ex);
+		}
+		return proposalDocumentsList;
+	}
+}

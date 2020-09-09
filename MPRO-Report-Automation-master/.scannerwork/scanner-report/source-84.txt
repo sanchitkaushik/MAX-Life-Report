@@ -1,0 +1,21 @@
+package com.maxlifeinsurance.mpro.handler;
+
+import com.amazonaws.services.lambda.runtime.Context;
+import com.maxlifeinsurance.mpro.service.AxisLeadIdReportService;
+import com.maxlifeinsurance.mpro.serviceimpl.AxisLeadIdReportServiceImpl;
+
+public class AxisLeadIdReportGenerationHandler {
+
+	AxisLeadIdReportService axisLeadIdReportService = new AxisLeadIdReportServiceImpl();
+
+	public Void handleRequest(Context context) {
+		context.getLogger().log("Axis-Mpro-LeadId report handler is starting...");
+		try {
+			boolean response = axisLeadIdReportService.generateAxisLeadIdReport(context);
+			context.getLogger().log("Axis-Mpro-LeadId report generation status is :: " + response);
+		} catch (Exception ex) {
+			context.getLogger().log("Exception occured in handleRequest while for Axis-Mpro-LeadId" + ex.getMessage());
+		}
+		return null;
+	}
+}

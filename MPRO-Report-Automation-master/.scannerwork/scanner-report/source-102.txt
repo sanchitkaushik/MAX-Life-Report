@@ -1,0 +1,9 @@
+package com.maxlifeinsurance.mpro.service;
+
+import com.amazonaws.services.lambda.runtime.Context;
+
+public interface SMTPReportService {
+	
+	public boolean generateSMTPReport(Context context);
+
+}

@@ -1,0 +1,59 @@
+package com.maxlifeinsurance.mpro.dto;
+
+import java.io.Serializable;
+
+/**
+ * 
+ * @author Qualtech
+ *
+ */
+public class MsaFsaDetails implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private double valueOfFSA;
+	private double valueOfMSA;
+	private double valueOfAFYP;
+	private double valueOfDD;
+	private double valueOfSUC;
+
+	public double getValueOfAFYP() {
+		return valueOfAFYP;
+	}
+
+	public void setValueOfAFYP(double valueOfAFYP) {
+		this.valueOfAFYP = valueOfAFYP;
+	}
+
+	public double getValueOfDD() {
+		return valueOfDD;
+	}
+
+	public void setValueOfDD(double valueOfDD) {
+		this.valueOfDD = valueOfDD;
+	}
+
+	public double getValueOfSUC() {
+		return valueOfSUC;
+	}
+
+	public void setValueOfSUC(double valueOfSUC) {
+		this.valueOfSUC = valueOfSUC;
+	}
+
+	public double getValueOfFSA() {
+		return valueOfFSA;
+	}
+
+	public void setValueOfFSA(double valueOfFSA) {
+		this.valueOfFSA = valueOfFSA;
+	}
+
+	public double getValueOfMSA() {
+		return valueOfMSA;
+	}
+
+	public void setValueOfMSA(double valueOfMSA) {
+		this.valueOfMSA = valueOfMSA;
+	}
+
+}

@@ -1,0 +1,1 @@
+:src/main/java/com/maxlifeinsurance/mpro/utils/Queries.java 2javaX"hr:src/main/java/com/maxlifeinsurance/mpro/utils/Queries.java

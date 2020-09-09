@@ -1,0 +1,65 @@
+package com.maxlifeinsurance.mpro.utils;
+
+public class Constants {
+
+	public static final String EXCEPTION_MESSAGE="Something Went Wrong Please Try After Some Time!";
+	public static final String SUCCESS="Success";
+	public static final String FAIL="Fail";
+	public static final String STATUS_200="200";
+	public static final String STATUS_500="500";
+	public static final String STATUS_700="700";
+	public static final String Y="Y";
+	public static final String N="N";
+	public static final String HEALTH="HEALTH";
+	public static final String SUCCESS_MESSAGE="Record Found";
+	public static final String FAIL_STATUS="Fail";
+	public static final String FAIL_MESSAGE="Record Not Found All proposal no is used";
+	public static final String APP_NOT_FOUND="AppId Not found";
+	public static final String PROPOSAL_NO="proposalNo";
+	public static final String IS_USED="isUsed";
+	public static final String SOURCE_APPLICATION="sourceApplication";
+	public static final String CHANNEL="channel";
+	public static final String FAMILY_TYPE="familyType";
+	public static final String CONSUMER_ID="consumerId";
+	public static final String UPDATE_ON="updatedOn";
+	public static final String FALSE = "false";
+	public static final String COUNT = "count";
+	public static final String INPUT = "input";
+	public static final String REGEX = "regex";
+	public static final String MONGODB_URI="mongodb_uri";
+	
+	public static final String APPLICATION = "application";
+	public static final String EMAIL_API_URL="com.qc.preissuance.sendMailURLConf";
+	public static final String MAIL_TO = "mailTo";
+	public static final String MONGO_COLLECTION = "com.mongo.collectionname";
+	
+	
+	public static final String MONGO_IP = "com.mongo.ip";
+	public static final String MONGO_PORT = "com.mongo.port";
+	public static final String MONGODB_DBNAME = "com.mongo.dbname";
+	public static final String MONGO_USERNAME = "com.mongo.username";
+	public static final String MONGO_PASS = "com.mongo.password";
+	
+	
+	public static final String S3BUCKETNAME = "s3BucketName";
+	
+//	Report query fields name
+	public static final String FROM_DATE = "fromDate";
+	
+	
+//	Report file name for email
+	public static final String AXIS_LEAD_ID_REPORT = "Axis-LeadId Report";
+	public static final String ASL_PEERLESS_DATA = "Asl & Peerless Data Report";
+	public static final String ENACH_BNPL_DATA_REPORT = "Enach-Bnpl Report";
+	public static final String MODE_OF_PAYMENT = "Mode-Of-Payment Report";
+	public static final String SCB_REPORT = "SCB";
+	public static final String YBL_RA_ID_MPRO = "YBL-RA-ID-MPRO Report";
+	public static final String SMTP = "SMTP Report";
+	public static final String AXIS_MPRO_REPORT = "Axis-Mpro Report";
+	public static final String AXIS_MPRO_REPORT_YTD = "Axis-Mpro-YTD Report";
+	public static final String ALL_GRID_DATA = "All-Grid Report";
+	
+
+	
+}
+

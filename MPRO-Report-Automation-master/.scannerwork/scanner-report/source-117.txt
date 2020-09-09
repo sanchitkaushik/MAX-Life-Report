@@ -1,0 +1,39 @@
+package com.maxlifeinsurance.mpro.utils;
+
+public class AESEncryptor 
+{
+	public static void main(String args[]) {
+
+	System.out.println(encrypt("4000652923||mpro||abc"));
+	System.out.println(decrypt("343030303635323932337c7c6d70726f7c7c616263"));
+	}
+
+	
+	//private AESEncryptor() {}
+	public static String encrypt(String str)
+	{
+		char[] chars = str.toCharArray();
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < chars.length; i++)
+		{
+			sb.append(Integer.toHexString((int)chars[i]));
+		}		 
+		return sb.toString();
+	}
+
+	public static String decrypt(String str)
+	{
+		StringBuilder sb = new StringBuilder();
+		StringBuilder temp = new StringBuilder();
+		for( int i=0; i<str.length()-1; i+=2 )
+		{
+			String output = str.substring(i, (i + 2));
+			int decimal = Integer.parseInt(output, 16);
+			sb.append((char)decimal);		 
+			temp.append(decimal);
+		}
+		return sb.toString();
+	}
+	
+	
+}

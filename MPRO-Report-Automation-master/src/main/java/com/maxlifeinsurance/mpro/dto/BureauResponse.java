@@ -1,0 +1,41 @@
+package com.maxlifeinsurance.mpro.dto;
+
+import java.io.Serializable;
+
+/**
+ * 
+ * @author Qualtech
+ *
+ */
+public class BureauResponse implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+	private String scoreName;
+	private String score;
+	private String scoreDate;
+
+	public String getScoreName() {
+		return scoreName;
+	}
+
+	public void setScoreName(String scoreName) {
+		this.scoreName = scoreName;
+	}
+
+	public String getScore() {
+		return score;
+	}
+
+	public void setScore(String score) {
+		this.score = score;
+	}
+
+	public String getScoreDate() {
+		return scoreDate;
+	}
+
+	public void setScoreDate(String scoreDate) {
+		this.scoreDate = scoreDate;
+	}
+
+}

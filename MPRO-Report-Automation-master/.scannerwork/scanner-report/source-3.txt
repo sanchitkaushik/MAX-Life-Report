@@ -1,0 +1,64 @@
+package com.maxlifeinsurance.mpro.config;
+
+import java.util.ResourceBundle;
+
+import org.bson.Document;
+import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.codecs.configuration.CodecRegistry;
+import org.bson.codecs.pojo.PojoCodecProvider;
+
+import com.maxlifeinsurance.mpro.dto.Proposal;
+import com.maxlifeinsurance.mpro.utils.Constants;
+import com.mongodb.ConnectionString;
+import com.mongodb.MongoClient;
+import com.mongodb.MongoClientSettings;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
+public class DbConfigForLocal {
+
+	static ResourceBundle application = ResourceBundle.getBundle("application");
+
+	private MongoClient sgMongoClient;
+	private String sgMongoClusterURI = System.getenv(Constants.MONGODB_URI);
+
+	public MongoCollection<Document> getDbConnection(String dbName) {
+		try {
+			MongoClient mongo = new MongoClient("localhost", 27017);
+//			CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(),
+//					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+//			MongoClientSettings clientSettings = MongoClientSettings.builder().app
+//	                .applyConnectionString(connectionString)
+//	                .codecRegistry(codecRegistry)
+//	                .build();
+//			MongoDatabase db = mongoClient.getDatabase("mydb").withCodecRegistry(codecRegistry);
+			
+//			CodecRegistry pojoCodecRegistry = CodecRegistries.fromRegistries(MongoClient.getDefaultCodecRegistry(),
+//					CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build()));
+			
+			ConnectionString connectionString = new ConnectionString("mongodb://localhost:27017");
+			CodecRegistry pojoCodecRegistry = CodecRegistries.fromProviders(PojoCodecProvider.builder().automatic(true).build());
+			CodecRegistry codecRegistry = CodecRegistries.fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), pojoCodecRegistry);
+			MongoClientSettings clientSettings = MongoClientSettings.builder()
+                    .applyConnectionString(connectionString)
+                    .codecRegistry(codecRegistry)
+                    .build();
+			com.mongodb.client.MongoClient mongoClient = MongoClients.create(clientSettings);
+			
+			System.out.println("Connecting to database");
+			MongoDatabase database = mongoClient.getDatabase(dbName).withCodecRegistry(codecRegistry);
+			System.out.println("Connection created successfully");
+			for (String name : database.listCollectionNames()) {
+				System.out.println(name);
+			}			
+			return mongo.getDatabase(dbName).getCollection("proposal").withCodecRegistry(codecRegistry);
+		} catch (Exception ex) {
+			System.out.println("Exception occured while creating connection with database :: "+ex);
+		}
+		return null;
+	}
+
+	
+
+}
