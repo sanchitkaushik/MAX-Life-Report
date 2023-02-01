@@ -1,1 +1,0 @@
-.src/main/java/com/maxlifeinsurance/mpro/config :r.src\main\java\com\maxlifeinsurance\mpro\config

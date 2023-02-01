@@ -1,1 +1,0 @@
-x=src/main/java/com/maxlifeinsurance/mpro/utils/AWSClients.java 2javaX.hr=src/main/java/com/maxlifeinsurance/mpro/utils/AWSClients.java

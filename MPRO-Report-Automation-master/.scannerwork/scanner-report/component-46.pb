@@ -1,1 +1,0 @@
-.Psrc/main/java/com/maxlifeinsurance/mpro/dto/JourneyFieldsModificationStatus.java 2javaX%hrPsrc/main/java/com/maxlifeinsurance/mpro/dto/JourneyFieldsModificationStatus.java

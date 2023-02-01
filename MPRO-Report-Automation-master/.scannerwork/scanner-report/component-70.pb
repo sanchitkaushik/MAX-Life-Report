@@ -1,1 +1,0 @@
-F8src/main/java/com/maxlifeinsurance/mpro/dto/Receipt.java 2javaXRhr8src/main/java/com/maxlifeinsurance/mpro/dto/Receipt.java

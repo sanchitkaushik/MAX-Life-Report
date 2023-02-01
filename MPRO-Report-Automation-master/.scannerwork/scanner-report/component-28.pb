@@ -1,1 +1,0 @@
-@src/main/java/com/maxlifeinsurance/mpro/dto/AdditionalFlags.java 2javaX*hr@src/main/java/com/maxlifeinsurance/mpro/dto/AdditionalFlags.java

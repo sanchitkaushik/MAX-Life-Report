@@ -1,7 +1,0 @@
-package com.maxlifeinsurance.mpro.enums;
-
-public enum CLIENT_ID {
-
-	POSV_STG, POSV_DEV, POSV_SIT, POSV_PROD;
-
-}
